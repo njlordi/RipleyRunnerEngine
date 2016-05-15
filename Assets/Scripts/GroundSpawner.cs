@@ -2,29 +2,27 @@
 using System.Collections;
 
 public class GroundSpawner : MonoBehaviour {
+	public GameObject startingGround;
 	
-	public GameObject [] groundVariants; 
+	public GameObject straightPiece;
+	public GameObject rightTurnPiece;
+	public GameObject leftTurnPiece;
+	public GameObject tIntersection;
+	
+	public const int numberOfGroundVariants = 4;
+	public GameObject [] groundPool;
+	
 	public float groundSpeed;
 	
 	void Start () {
-		groundSpeed = 4.0f;
-		if (groundVariants != null){
-			Debug.Log("Setting speed for each ground in array");
-			foreach (GameObject go in groundVariants) {
-				go.GetComponent<Ground>().speed = groundSpeed;
-				Debug.Log(go.transform.position.z);
-			}
-		}
+		groundPool = new GameObject[numberOfGroundVariants] {straightPiece, rightTurnPiece, leftTurnPiece, tIntersection};
+		groundSpeed = 1.0f;
+		startingGround.GetComponent<Ground>().speed = groundSpeed;
 	}
-		
-	void Update () {
-		foreach (GameObject go in groundVariants) {
-				// disable ground piece when it reaches a certain z coordinate (IE not visable anymore!)
-			if (go.transform.position.z <= -10) {
-				go.SetActive(false);
-			}
-			//go.GetComponent<Ground>().speed = groundSpeed;
-			Debug.Log(go.transform.position.z);
-		}
+	
+	void FixedUpdate() {
+		//for (int i = 0; i < numberOfGroundVariants; i++) {
+			groundPool[0].gameObject.transform.Translate(-Vector3.forward * (Time.deltaTime * groundSpeed));
+	//}
 	}
 }

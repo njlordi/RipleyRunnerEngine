@@ -2,24 +2,21 @@
 using System.Collections;
 
 public class Ground : MonoBehaviour {
-	public Vector3 StartingPoint;
+	public Vector3 startingPoint;
 	public float speed;
 	
+	void Start() {
+	}
+	
 	void OnEnable () {
-		StartingPoint = transform.position;
-	}
-	
-	// Use this for initialization
-	void Start () {
-	
-	}
+		startingPoint = new Vector3(0, 1.0f, 20.0f);
+	}	
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		transform.Translate(-Vector3.forward * (Time.deltaTime * speed));
-	}
-	
-	void OnDisable() {
-		transform.position = StartingPoint;
+		if (transform.position.z <= -20.0f) {
+			Destroy(gameObject);
+		}
 	}
 }
