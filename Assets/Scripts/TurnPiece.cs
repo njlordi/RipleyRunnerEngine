@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RightTurnPiece : MonoBehaviour {
+public class TurnPiece : MonoBehaviour {
 
 	public bool isStartingGround;
 	public Vector3 startingPoint;
 	public float speed;
-	
 	public float turnAngle;
 	public float turnSpeed;
 	
@@ -27,6 +26,7 @@ public class RightTurnPiece : MonoBehaviour {
 		turnSpeed = speed * Mathf.PI;
 		
 		// once the ground is out of bounds and not rotated to 270 degrees, start rotating
+		// replace this code with Mathf.clamp?
 		if (transform.position.z <= 15 && turnAngle >= 270f) {
 			turnAngle -= Time.deltaTime * turnSpeed;
 			transform.rotation = Quaternion.Euler(0.0f, turnAngle, 0.0f);

@@ -18,6 +18,6 @@ public class GroundSpawner : MonoBehaviour {
 		groundPool = new GameObject[numberOfGroundVariants] {straightPiece, rightTurnPiece, leftTurnPiece, tIntersection};
 		startingGround.GetComponent<StraightPiece>().speed = groundSpeed;
 		straightPiece.GetComponent<StraightPiece>().speed = groundSpeed;
-		rightTurnPiece.GetComponent<RightTurnPiece>().speed = groundSpeed;
+		rightTurnPiece.GetComponent<TurnPiece>().speed = groundSpeed;
 	}
 }
