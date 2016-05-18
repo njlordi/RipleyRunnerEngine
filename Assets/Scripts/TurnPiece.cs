@@ -2,13 +2,17 @@
 using System.Collections;
 
 public class TurnPiece : MonoBehaviour {
-
-	public bool isStartingGround;
+	
 	public Vector3 startingPoint;
+	
+	public bool isStartingGround;
+	public enum GroundPieces {straight, right, left, t};
+	public GroundPieces gp;
+	
 	public float speed;
 	public float turnAngle;
 	public float turnSpeed;
-	
+
 	void Start() {
 		turnAngle = 360f;
 	}
@@ -25,6 +29,27 @@ public class TurnPiece : MonoBehaviour {
 		
 		turnSpeed = speed * Mathf.PI;
 		
+		switch(gp) 
+		{
+		case GroundPieces.right:
+			RotateToRunRight();
+			break;
+		default:
+			break;
+		}
+		
+		if (transform.position.z <= -100.0f) {
+			if (isStartingGround) {
+				Destroy(gameObject);
+			} else {
+				gameObject.SetActive(false);
+			}
+		}
+		
+		
+	}
+	
+	void RotateToRunRight() {
 		// once the ground is out of bounds and not rotated to 270 degrees, start rotating
 		// replace this code with Mathf.clamp?
 		if (transform.position.z <= 15 && turnAngle >= 270f) {
@@ -34,14 +59,6 @@ public class TurnPiece : MonoBehaviour {
 		(this may not be necessary) */	
 		} else if (transform.position.z <= 15) {
 			transform.rotation = Quaternion.Euler(0.0f, 270f, 0.0f);
-		}
-		
-		if (transform.position.z <= -100.0f) {
-			if (isStartingGround) {
-				Destroy(gameObject);
-			} else {
-				gameObject.SetActive(false);
-			}
 		}
 	}
 }

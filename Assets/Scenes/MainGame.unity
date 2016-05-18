@@ -273,8 +273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e07c74fc9045d4e9196f25080db78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStartingGround: 0
   startingPoint: {x: 0, y: 0, z: 0}
+  isStartingGround: 0
+  gp: 2
   speed: 0
   turnAngle: 0
   turnSpeed: 0
