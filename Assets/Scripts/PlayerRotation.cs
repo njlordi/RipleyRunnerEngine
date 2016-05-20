@@ -2,18 +2,13 @@
 using System.Collections;
 
 public class PlayerRotation : MonoBehaviour {
-	
-	public string directionToTurn;
+
 	public float turnSpeed;
-	public float currentYRotation;
-	
 	public Quaternion targetRotation;
 	public float degreesToTurn;
 	
-	public bool keyInputEnabled;
-	public bool flagForDegreeChange;
+	public bool turnInputEnabled;
 
-	// Use this for initialization
 	void Awake () {
 		degreesToTurn = 0.0f;
 		turnSpeed = 200.0f;
@@ -21,58 +16,35 @@ public class PlayerRotation : MonoBehaviour {
 	}
 	
 	void Start() {
-		flagForDegreeChange = true;
-		keyInputEnabled = true;
+		turnInputEnabled = true;
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		
-		currentYRotation = gameObject.transform.rotation.eulerAngles.y;
 		
-		if (Input.GetKey(KeyCode.LeftArrow) && keyInputEnabled) {
-			directionToTurn = "left";
-			keyInputEnabled = false;
-			flagForDegreeChange = true;
-		}
-		if (Input.GetKey(KeyCode.RightArrow) && keyInputEnabled) {
-			directionToTurn = "right";
-			keyInputEnabled = false;
-			flagForDegreeChange = true;
-		}
-		
-		switch(directionToTurn){
-
-		case "left":
+		if (Input.GetKey(KeyCode.LeftArrow) && turnInputEnabled) {
 			TurnLeft();
-			break;			
-		case "right":
-			TurnRight();
-			break;
-		default:
-			break;
-			
 		}
+		if (Input.GetKey(KeyCode.RightArrow) && turnInputEnabled) {
+			TurnRight();
+		}
+		
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 		
 		if (transform.rotation == targetRotation) {
-			keyInputEnabled = true;
+			turnInputEnabled = true;
+		} else {
+			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 		}
 	}
 	
 	void TurnLeft() {
-		if (flagForDegreeChange) {
-			degreesToTurn -= 90.0f;
-			flagForDegreeChange = false;
-		}
-		//targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
+		turnInputEnabled = false;
+		degreesToTurn -= 90.0f;
+		
 	}
 	void TurnRight() {
-		if (flagForDegreeChange) {
-			degreesToTurn += 90.0f;
-			flagForDegreeChange = false;
-		}
-		//targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
+		turnInputEnabled = false;
+		degreesToTurn += 90.0f;
 	}
 }
