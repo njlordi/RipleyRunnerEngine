@@ -8,6 +8,8 @@ public class PlayerRotation : MonoBehaviour {
 	public float degreesToTurn;
 	
 	public bool turnInputEnabled;
+	
+	public GroundPiece gp;
 
 	void Awake () {
 		degreesToTurn = 0.0f;
@@ -17,6 +19,7 @@ public class PlayerRotation : MonoBehaviour {
 	
 	void Start() {
 		turnInputEnabled = true;
+		GroundPiece.moveLeft();
 	}
 	
 	void Update () {
