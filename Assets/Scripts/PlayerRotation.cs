@@ -19,7 +19,7 @@ public class PlayerRotation : MonoBehaviour {
 	
 	void Start() {
 		turnInputEnabled = true;
-		GroundPiece.moveLeft();
+		GroundPiece.MoveLeft();
 	}
 	
 	void Update () {
@@ -27,9 +27,11 @@ public class PlayerRotation : MonoBehaviour {
 		
 		if (Input.GetKey(KeyCode.LeftArrow) && turnInputEnabled) {
 			TurnLeft();
+			GroundPiece.RotateToTurnLeft();
 		}
 		if (Input.GetKey(KeyCode.RightArrow) && turnInputEnabled) {
 			TurnRight();
+			GroundPiece.RotateToTurnRight();
 		}
 		
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
