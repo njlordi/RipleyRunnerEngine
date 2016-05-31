@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ground
   - Spawner
+  - StraightPiece
+  - LeftTurnPiece
+  - RightTurnPiece
+  - tIntersection
   layers:
   - Default
   - TransparentFX

@@ -3,13 +3,11 @@ using System.Collections;
 
 public class PlayerRotation : MonoBehaviour {
 
+	public float runSpeed;
 	public float turnSpeed;
-	public Quaternion targetRotation;
-	public float degreesToTurn;
-	
-	public bool turnInputEnabled;
-	
-	public GroundPiece gp;
+	Quaternion targetRotation;
+	float degreesToTurn;
+	bool turnInputEnabled;
 
 	void Awake () {
 		degreesToTurn = 0.0f;
@@ -23,15 +21,13 @@ public class PlayerRotation : MonoBehaviour {
 	}
 	
 	void Update () {
-		
+		gameObject.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
 		
 		if (Input.GetKey(KeyCode.LeftArrow) && turnInputEnabled) {
 			TurnLeft();
-			GroundPiece.RotateToTurnLeft();
 		}
 		if (Input.GetKey(KeyCode.RightArrow) && turnInputEnabled) {
 			TurnRight();
-			GroundPiece.RotateToTurnRight();
 		}
 		
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
