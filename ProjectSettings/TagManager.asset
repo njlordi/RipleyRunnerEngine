@@ -9,7 +9,7 @@ TagManager:
   - StraightPiece
   - LeftTurnPiece
   - RightTurnPiece
-  - tIntersection
+  - tIntersectionPiece
   layers:
   - Default
   - TransparentFX
