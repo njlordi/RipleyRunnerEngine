@@ -4,14 +4,19 @@ using System.Collections;
 public class PlayerDetector : MonoBehaviour {
 	
 	public string currentPieceTag;
-	public int randArrayIndex;
 	GameObject go;
 	GameObject go2;
 	float destroyDelayInSeconds;
 	
+	public int randArrayIndex;
+	string pieceSelection;
+	
 	void Awake() {
 		// Get tag from parent
 		currentPieceTag = transform.parent.gameObject.tag;
+		
+		randArrayIndex = 0;
+		pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 		
 		destroyDelayInSeconds = 0.5f;
 	}
@@ -30,32 +35,34 @@ public class PlayerDetector : MonoBehaviour {
 	}
 	
 	void spawnNext() {
-		string[] pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "tIntersectionPiece"};
 		randArrayIndex = Random.Range(0, 4);
-		string pieceSelection = pieceTagArray[randArrayIndex];
+		pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 		
 		switch(currentPieceTag) {
-		case "StraightPiece":	
+				
+		case "StraightPiece":	// YOU WALKED ONTO A STRAIGHT PIECE SO.....
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position + transform.parent.forward * 100.0f, 
 				transform.parent.rotation);
 			break;
 			
-		case "LeftTurnPiece":
+		case "LeftTurnPiece":   // YOU WALKED ONTO A LEFT ANGLE PIECE SO.....
+			GameManager.DirectionToSpawnShiftLeft();
+			pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position - transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(-90f, Vector3.up));
-				
 			break;
 			
-		case "RightTurnPiece":
+		case "RightTurnPiece":  // YOU WALKED ONTO A RIGHT ANGLE PIECE SO.....
+			GameManager.DirectionToSpawnShiftRight();
+			pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position + transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(90f, Vector3.up));
-				
 			break;
 			
-		case "tIntersectionPiece":
+		case "tIntersectionPiece": // focus on this later!
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position - transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(-90f, Vector3.up));
@@ -64,6 +71,7 @@ public class PlayerDetector : MonoBehaviour {
 				transform.parent.position + transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(90f, Vector3.up));
 			
+			GameManager.axisDirection = GameManager.MapSpawnDirection.tBranch;
 			break;
 			
 		default:
