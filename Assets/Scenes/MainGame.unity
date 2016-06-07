@@ -359,7 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4891f43314a6844af81d790955cd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 100
   turnSpeed: 0
 --- !u!54 &970803310
 Rigidbody:
@@ -387,6 +386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2054cf9cb6147274abb4be8ff91a92f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runSpeed: 50
+  strafeAmount: 0
+  strafeSpeed: 0
+  strafeFixedFrame: 0
+  strafeDistanceFromOrigin: 0
+  inputEnabled: 0
 --- !u!1 &1293455086
 GameObject:
   m_ObjectHideFlags: 0

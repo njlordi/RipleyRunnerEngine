@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerRotation : MonoBehaviour {
 
-	public float runSpeed;
 	public float turnSpeed;
 	Quaternion targetRotation;
 	float degreesToTurn;
@@ -21,7 +20,6 @@ public class PlayerRotation : MonoBehaviour {
 	}
 	
 	void Update () {
-		gameObject.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
 		
 		if (Input.GetKey(KeyCode.LeftArrow) && turnInputEnabled) {
 			TurnLeft();
@@ -42,7 +40,6 @@ public class PlayerRotation : MonoBehaviour {
 	void TurnLeft() {
 		turnInputEnabled = false;
 		degreesToTurn -= 90.0f;
-		
 	}
 	void TurnRight() {
 		turnInputEnabled = false;
