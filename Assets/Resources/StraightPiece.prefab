@@ -82,6 +82,7 @@ GameObject:
   - 33: {fileID: 3367982}
   - 65: {fileID: 6519082}
   - 23: {fileID: 2329214}
+  - 114: {fileID: 11475010}
   m_Layer: 0
   m_Name: StraightPiece
   m_TagString: StraightPiece
@@ -354,6 +355,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11475010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d902b8a06ab2a418997b78a0e79f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPickupPrefab: {fileID: 161900, guid: 8a53253001f2be343a28742e4e2bdfe3, type: 2}
+  laneValue: 0
 --- !u!114 &11497258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5bc7f0e4f502241a7cde564c808c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToString: 
+  currentPieceTag: 
+  randArrayIndex: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
