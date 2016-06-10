@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Written by Nick L.
+// Code for strafing in the RipleyRunner Engine
+using UnityEngine;
 using System.Collections;
 
 public class PlayerStrafe : MonoBehaviour
@@ -7,7 +9,8 @@ public class PlayerStrafe : MonoBehaviour
 
     public float strafeAmount;
     public float strafeSpeed;
-    public float strafeFixedFrame;
+	public float strafeFixedFrame;
+	public float myDeltaTime;
     public float strafeDistanceFromOrigin;
 
     // rename these next two
@@ -28,13 +31,19 @@ public class PlayerStrafe : MonoBehaviour
         currentStrafeLocation = StrafeLocation.center;
         inputEnabled = true;
         strafeAmount = 8.0f;
-        strafeSpeed = 20.0f;
+	    strafeSpeed = 20.0f;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        gameObject.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
+	    // for debugging, erase later
+	    myDeltaTime = Time.fixedDeltaTime;
+	    
+	    // steady movement variable
+	    strafeFixedFrame = strafeSpeed * Time.fixedDeltaTime;
+	    
+	    //gameObject.transform.Translate(Vector3.forward * Time.fixedDeltaTime * runSpeed);
 
 	    if (Input.GetKey(KeyCode.A) && inputEnabled == true 
 		    && currentStrafeLocation != StrafeLocation.left)
@@ -62,8 +71,16 @@ public class PlayerStrafe : MonoBehaviour
 
     public void StrafeLeft()
     {
-        inputEnabled = false;
+	    // disable keyboard input while strafing
+	    inputEnabled = false;
 	    
+        // move the player to it's relative left
+        transform.position -= transform.right * strafeFixedFrame;
+	    
+	    // keep track of how much movement has happened so far
+	    strafeDistanceFromOrigin += strafeFixedFrame;
+	    
+	    // change enum for left\center\right lanes accordingly
 	    if (strafeDistanceFromOrigin >= strafeAmount)
 	    {
 		    if (currentStrafeLocation == StrafeLocation.center)
@@ -71,21 +88,26 @@ public class PlayerStrafe : MonoBehaviour
 		    else
 			    currentStrafeLocation = StrafeLocation.center;
 		    
+		    // disable movement in this direction
 		    strafeLeftFlag = false;
+		    // movement has finished... enable joyboard input
 		    inputEnabled = true;
 	    }
-
-        // steady movement variable
-        strafeFixedFrame = Time.fixedDeltaTime * strafeSpeed;
-
-        transform.position -= transform.right * strafeFixedFrame;
-        strafeDistanceFromOrigin += strafeFixedFrame;
     }
 
     public void StrafeRight()
-    {
+	{
+		// disable keyboard input while strafing
 	    inputEnabled = false;
-	    
+		
+        // move the player to it's relative right
+		transform.position += transform.right * strafeFixedFrame;
+		
+		// keep track of how much movement has happened so far
+		strafeDistanceFromOrigin += strafeFixedFrame;  
+		
+		
+		// change enum for left\center\right lanes accordingly
 	    if (strafeDistanceFromOrigin >= strafeAmount)
 	    {
 		    if (currentStrafeLocation == StrafeLocation.center)
@@ -93,14 +115,10 @@ public class PlayerStrafe : MonoBehaviour
 		    else
 			    currentStrafeLocation = StrafeLocation.center;
 		    
+		    // disable movement in this direction
 		    strafeRightFlag = false;
+		    // movement has finished... enable joyboard input
 		    inputEnabled = true;
 	    }
-
-        // steady movement variable
-        strafeFixedFrame = Time.fixedDeltaTime * strafeSpeed;
-
-        transform.position += transform.right * strafeFixedFrame;
-        strafeDistanceFromOrigin += strafeFixedFrame;  
     }
 }
