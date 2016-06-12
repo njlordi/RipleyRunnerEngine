@@ -25,8 +25,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 402848}
-  - 114: {fileID: 11402278}
   - 135: {fileID: 13576734}
+  - 114: {fileID: 11439764}
   m_Layer: 0
   m_Name: PickUpObject
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101988}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11402278
+--- !u!114 &11439764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e987f7dd646a3214d87d933ea51d1cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 0
+  coinNoise: {fileID: 8300000, guid: 609e085b4f8752341a8249a79672e45e, type: 3}
 --- !u!135 &13576734
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -188,6 +188,7 @@ MonoBehaviour:
   strafeAmount: 0
   strafeSpeed: 0
   strafeFixedFrame: 0
+  movementFlag: 0
   strafeLeftFlag: 0
   strafeRightFlag: 0
   inputEnabled: 0
@@ -533,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa21843a2cb3ba4b82161a760c2c91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 20
+  runSpeed: 50
 --- !u!1 &1050649477
 GameObject:
   m_ObjectHideFlags: 0

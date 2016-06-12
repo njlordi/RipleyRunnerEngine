@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickUpRotation : MonoBehaviour {
+public class PickUp : MonoBehaviour {
 	
 	public float rotationSpeed;
+	public AudioClip coinNoise;
 	// Use this for initialization
 	void Start () {
 		rotationSpeed = 250.0f;
@@ -14,7 +15,8 @@ public class PickUpRotation : MonoBehaviour {
 		transform.Rotate(Vector3.up * Time.deltaTime * rotationSpeed);
 	}
 	
-	void OnTriggerEnter() {
+	void OnTriggerEnter(Collider other) {
+		AudioSource.PlayClipAtPoint(coinNoise, other.transform.position);
 		gameObject.SetActive(false);
 	}
 }
