@@ -43,7 +43,7 @@ public class PlayerStrafe : MonoBehaviour
 	    // steady movement variable
 	    strafeFixedFrame = strafeSpeed * Time.fixedDeltaTime;
 	    
-	    //gameObject.transform.Translate(Vector3.forward * Time.fixedDeltaTime * runSpeed);
+	    gameObject.transform.Translate(Vector3.forward * Time.fixedDeltaTime * runSpeed);
 
 	    if (Input.GetKey(KeyCode.A) && inputEnabled == true 
 		    && currentStrafeLocation != StrafeLocation.left)
