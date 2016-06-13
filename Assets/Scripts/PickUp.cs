@@ -2,12 +2,13 @@
 using System.Collections;
 
 public class PickUp : MonoBehaviour {
-	
 	public float rotationSpeed;
-	public AudioClip coinNoise;
+	public PlayerSounds playerSounds;
+	
 	// Use this for initialization
 	void Start () {
 		rotationSpeed = 250.0f;
+		playerSounds = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSounds>();
 	}
 	
 	// Update is called once per frame
@@ -16,7 +17,7 @@ public class PickUp : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-		AudioSource.PlayClipAtPoint(coinNoise, other.transform.position);
+		playerSounds.PlayPickUpNoise();
 		gameObject.SetActive(false);
 	}
 }
