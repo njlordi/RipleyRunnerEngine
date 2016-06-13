@@ -21,8 +21,9 @@ public class PlayerDetector : MonoBehaviour {
 		destroyDelayInSeconds = 0.5f;
 	}
 	
-	void OnTriggerEnter() {
-		spawnNext();
+	void OnTriggerEnter(Collider other) {
+		if (other.tag == "Player")
+			spawnNext();
 	}
 	
 	void OnTriggerExit() {
