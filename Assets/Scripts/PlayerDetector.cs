@@ -26,8 +26,12 @@ public class PlayerDetector : MonoBehaviour {
 			spawnNext();
 	}
 	
-	void OnTriggerExit() {
-		destroyParent();
+	void OnTriggerExit(Collider other) {
+		if (other.tag == "Player") {
+			Debug.Log ("Stopping centering coroutine in PlayerMovement script.");
+			other.GetComponentInParent<PlayerMovement>().KillCenterPlayerCoroutine();
+			destroyParent();
+		}
 	}
 
 	void destroyParent() {
@@ -72,7 +76,7 @@ public class PlayerDetector : MonoBehaviour {
 				transform.parent.position + transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(90f, Vector3.up));
 			
-			GameManager.axisDirection = GameManager.MapSpawnDirection.tBranch;
+			//GameManager.axisDirection = GameManager.MapSpawnDirection.tBranch;
 			break;
 			
 		default:

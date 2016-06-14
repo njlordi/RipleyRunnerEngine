@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Update () {
-		turnSpeed = runSpeed * 5.0f;
+		turnSpeed = runSpeed * 6.0f;
 		
 		gameObject.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
 		
@@ -37,14 +37,45 @@ public class PlayerMovement : MonoBehaviour {
 		turnInputEnabled = false;
 		degreesToTurn -= 90.0f;
 	}
+	
 	public void TurnRight() {
 		turnInputEnabled = false;
 		degreesToTurn += 90.0f;
 	}
-	public void CenterPlayer(Vector3 centerVector) {
-		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
-			transform.position  = new Vector3 (centerVector.x , this.transform.position.y, this.transform.position.z);
-		else
-			transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, centerVector.z);
+	
+	public void KillCenterPlayerCoroutine() {
+		StopAllCoroutines();
 	}
+	
+	/// <summary>
+	/// This coroutine centers the player on the current piece so it's not 
+	/// </summary>
+	/// <param name="centerVector"></param>
+	/// <returns></returns>
+	public IEnumerator CenterPlayer(Vector3 centerVector) {
+		
+		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
+		{
+			Debug.Log("Lerping player towards target X value");
+			while (transform.position.x < (centerVector.x - 0.1f) 
+				|| transform.position.x > (centerVector.x + 0.1f))  
+			{
+				Debug.Log("Lerp Frames to X");
+				transform.position = Vector3.Lerp(transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 12.0f));
+				yield return null;
+			}
+		}
+		else
+		{
+			Debug.Log("Lerping player towards target Z value");
+			while (transform.position.x < (centerVector.z - 0.1f) 
+				|| transform.position.x > (centerVector.z + 0.1f)) {
+				Debug.Log("Lerp Frames to X");
+				transform.position = Vector3.Lerp(transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 12.0f));
+				yield return null;
+			}
+		}
+		Debug.Log("Player centering completed.");
+	}
+	
 }

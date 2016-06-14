@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	
-	public enum MapSpawnDirection {facingZ, facingNegX, facingX, tBranch};
+	public enum MapSpawnDirection {facingZ, facingNegX, facingX};
 	public static MapSpawnDirection axisDirection;
 	
 	public static string[] pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "StraightPiece"};
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 			pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "StraightPiece"};
 		} else {
 			axisDirection = MapSpawnDirection.facingNegX;
-			pieceTagArray = new string[]{"StraightPiece", "StraightPiece", "RightTurnPiece", "StraightPiece"};
+			pieceTagArray = new string[]{"StraightPiece", "RightTurnPiece", "RightTurnPiece", "StraightPiece"};
 		}
 	}
 	
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 			pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "StraightPiece"};
 		} else {
 			axisDirection = MapSpawnDirection.facingX;
-			pieceTagArray = new string[]{"StraightPiece", "StraightPiece", "LeftTurnPiece", "StraightPiece"};
+			pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "LeftTurnPiece", "StraightPiece"};
 		}
 	}
 }

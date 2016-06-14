@@ -18,6 +18,7 @@ public class PickUp : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		playerSounds.PlayPickUpNoise();
+		PlayerStats.pickUpsCollected++;
 		gameObject.SetActive(false);
 	}
 }
