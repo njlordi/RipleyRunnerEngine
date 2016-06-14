@@ -9,6 +9,8 @@ TagManager:
   - LeftTurnPiece
   - RightTurnPiece
   - tIntersectionPiece
+  - Ground
+  - PlayerGeneralLocation
   layers:
   - Default
   - TransparentFX

@@ -17,6 +17,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &136238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 416768}
+  - 33: {fileID: 3348538}
+  - 65: {fileID: 6542792}
+  - 114: {fileID: 11460016}
+  m_Layer: 0
+  m_Name: TurnCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &138894
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +136,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 200.00002}
   m_Children: []
   m_Father: {fileID: 493970}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &410902
 Transform:
   m_ObjectHideFlags: 1
@@ -130,7 +148,19 @@ Transform:
   m_LocalScale: {x: 0.59999996, y: 1, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 493970}
-  m_RootOrder: 4
+  m_RootOrder: 5
+--- !u!4 &416768
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.025, y: 5, z: 0.008}
+  m_LocalScale: {x: 0.3, y: 10, z: 0.25}
+  m_Children: []
+  m_Father: {fileID: 493970}
+  m_RootOrder: 0
 --- !u!4 &440040
 Transform:
   m_ObjectHideFlags: 1
@@ -142,7 +172,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 200.00002}
   m_Children: []
   m_Father: {fileID: 493970}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &469990
 Transform:
   m_ObjectHideFlags: 1
@@ -154,7 +184,7 @@ Transform:
   m_LocalScale: {x: 0.19999999, y: 1, z: 0.39999998}
   m_Children: []
   m_Father: {fileID: 493970}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &487336
 Transform:
   m_ObjectHideFlags: 1
@@ -166,7 +196,7 @@ Transform:
   m_LocalScale: {x: 1, y: 50, z: 1}
   m_Children: []
   m_Father: {fileID: 493970}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &493970
 Transform:
   m_ObjectHideFlags: 1
@@ -174,9 +204,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.5, y: 656.66547, z: -158.5826}
+  m_LocalPosition: {x: -84.82186, y: 179.21564, z: -281.26746}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children:
+  - {fileID: 416768}
   - {fileID: 487336}
   - {fileID: 440040}
   - {fileID: 403990}
@@ -347,6 +378,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138894}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &3348538
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136238}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3353686
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -406,6 +444,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6542792
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136238}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6591622
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -430,6 +480,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11460016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 136238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3164412c3669dce45ac6e642a63643a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11484676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -441,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea5bc7f0e4f502241a7cde564c808c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToString: 
+  currentPieceTag: 
   randArrayIndex: 0
 --- !u!1001 &100100000
 Prefab:
