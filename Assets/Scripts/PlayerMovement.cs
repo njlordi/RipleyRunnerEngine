@@ -41,4 +41,10 @@ public class PlayerMovement : MonoBehaviour {
 		turnInputEnabled = false;
 		degreesToTurn += 90.0f;
 	}
+	public void CenterPlayer(Vector3 centerVector) {
+		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
+			transform.position  = new Vector3 (centerVector.x , this.transform.position.y, this.transform.position.z);
+		else
+			transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, centerVector.z);
+	}
 }

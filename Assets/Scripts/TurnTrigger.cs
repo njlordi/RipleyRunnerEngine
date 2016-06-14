@@ -13,4 +13,11 @@ public class TurnTrigger : MonoBehaviour {
 			other.GetComponentInParent<PlayerMovement>().TurnRight();
 		}
 	}
+	
+	void OnTriggerExit(Collider other) {
+		GetComponent<BoxCollider>().isTrigger = false;
+		if (other.tag == "Player") {
+			other.GetComponentInParent<PlayerMovement>().CenterPlayer(transform.parent.position);
+		}
+	}
 }
