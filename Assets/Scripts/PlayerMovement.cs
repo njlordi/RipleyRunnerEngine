@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour {
 	
 	void Awake () {
 		degreesToTurn = 0.0f;
-		turnSpeed = 200.0f;
 		targetRotation = Quaternion.identity;
 	}
 	
@@ -20,16 +19,16 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Update () {
-		turnSpeed = runSpeed * 6.0f;
+		turnSpeed = runSpeed * 5.0f;
 		
-		gameObject.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
+		this.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
 		
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
 		
-		if (transform.rotation == targetRotation) {
+		if (this.transform.rotation == targetRotation) {
 			turnInputEnabled = true; //remove?
 		} else {
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
+			this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 		}
 	}
 	
@@ -48,30 +47,30 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	/// <summary>
-	/// This coroutine centers the player on the current piece so it's not 
+	/// This coroutine centers the player on the current piece.
+	/// It is called from TurnTrigger.cs which passes the current piece
+	/// (it's parent's) transform.position.
 	/// </summary>
-	/// <param name="centerVector"></param>
-	/// <returns></returns>
 	public IEnumerator CenterPlayer(Vector3 centerVector) {
 		
 		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
 		{
 			Debug.Log("Lerping player towards target X value");
-			while (transform.position.x < (centerVector.x - 0.1f) 
-				|| transform.position.x > (centerVector.x + 0.1f))  
+			while (this.transform.position.x < (centerVector.x - 0.1f) 
+				|| this.transform.position.x > (centerVector.x + 0.1f))  
 			{
 				Debug.Log("Lerp Frames to X");
-				transform.position = Vector3.Lerp(transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 12.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 12.0f));
 				yield return null;
 			}
 		}
 		else
 		{
 			Debug.Log("Lerping player towards target Z value");
-			while (transform.position.x < (centerVector.z - 0.1f) 
-				|| transform.position.x > (centerVector.z + 0.1f)) {
+			while (this.transform.position.z < (centerVector.z - 0.1f) 
+				|| this.transform.position.z > (centerVector.z + 0.1f)) {
 				Debug.Log("Lerp Frames to X");
-				transform.position = Vector3.Lerp(transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 12.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 12.0f));
 				yield return null;
 			}
 		}
