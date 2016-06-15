@@ -5,13 +5,13 @@ using System.Collections;
 
 public class PlayerLaneChange : MonoBehaviour
 {
-	public float strafeAmount;
+	public float strafeDestinationModifier;
 	public float strafeSpeed;
 	public float strafeFixedFrame;
 	
 	public bool movementFlag;
 	
-    // rename these next two
+    // rename these next two?
 	public bool strafeLeftFlag;
 	public bool strafeRightFlag;
 	
@@ -19,27 +19,36 @@ public class PlayerLaneChange : MonoBehaviour
 	
 	public enum StrafeLocation { left, center, right };
 	public StrafeLocation currentStrafeLocation;
+	public float strafeAmount;
+	public float strafeCenter = 0;
+	
+	float strafeResponsivenessLevel;
+	
 	
     // Use this for initialization
-	void Start()
+    void Awake()
+    {
+	    strafeAmount = 4.0f;
+	    strafeSpeed = 5.0f;
+	    strafeDestinationModifier = 0.0f;
+	    strafeResponsivenessLevel = 0.5f;
+    }
+
+    void Start()
 	{
 		movementFlag = false;
-		
-		strafeAmount = 0.0f;
-		
 		strafeLeftFlag = false;
 		strafeRightFlag = false;
 		
 		currentStrafeLocation = StrafeLocation.center;
+		strafeDestinationModifier = 0.0f;
 		inputEnabled = true;
-		strafeAmount = 0.0f;
-		strafeSpeed = 5.0f;
 	}
 	
     // Update is called once per frame
 	void Update()
 	{
-	    // steady movement variable
+	    // fixed frame variable for movement
 		strafeFixedFrame = strafeSpeed * Time.deltaTime;
 
 		if (Input.GetKey(KeyCode.A) && inputEnabled == true)
@@ -65,21 +74,20 @@ public class PlayerLaneChange : MonoBehaviour
         if (strafeRightFlag)
 			SlideToRightLane();
 			
-		// not sure which is better... MoveTowards or Lerp... :/
 		Vector3 tempVector = transform.localPosition;
-		tempVector.x = Mathf.Lerp(tempVector.x, strafeAmount, strafeFixedFrame);
+		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
 		transform.localPosition = tempVector;
 		
-		if (transform.localPosition.x >= 3.7f) {
+		if (transform.localPosition.x >= strafeAmount - strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.right;
 			inputEnabled = true;
 		}
-		if (transform.localPosition.x <= -3.7f) {
+		if (transform.localPosition.x <= -(strafeAmount - strafeResponsivenessLevel)) {
 			currentStrafeLocation = StrafeLocation.left;
 			inputEnabled = true;
 		}
-		if (transform.localPosition.x < 0.1f 
-			&& transform.localPosition.x > -0.1f) {
+		if (transform.localPosition.x < strafeResponsivenessLevel 
+			&& transform.localPosition.x > -strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.center;
 			inputEnabled = true;
 			}
@@ -87,16 +95,16 @@ public class PlayerLaneChange : MonoBehaviour
 	
 	public void SlideToLeftLane()
 	{
-		strafeAmount = -4.0f;
+		strafeDestinationModifier = -strafeAmount;
 	}
 	
 	public void SlideToRightLane()
 	{
-		strafeAmount = 4.0f;
+		strafeDestinationModifier = strafeAmount;
 	}
 	
 	public void SlideToCenterLane() 
 	{
-		strafeAmount = 0.0f;
+		strafeDestinationModifier = strafeCenter;
 	}
 }

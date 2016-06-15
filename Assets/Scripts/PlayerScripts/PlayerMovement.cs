@@ -4,9 +4,11 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 	public float runSpeed;
 	public float turnSpeed;
-	Quaternion targetRotation;
 	float degreesToTurn;
+	
+	Quaternion targetRotation;
 	public bool turnInputEnabled;
+	bool PlayerCurrentlyCentering;
 	
 	void Awake () {
 		degreesToTurn = 0.0f;
@@ -14,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Start() {
+		PlayerCurrentlyCentering = false;
 		turnInputEnabled = true;
 		GroundPiece.MoveLeft();
 	}
@@ -43,7 +46,11 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	public void KillCenterPlayerCoroutine() {
-		StopAllCoroutines();
+		if (PlayerCurrentlyCentering) {
+			StopCoroutine("CenterPlayer");
+			Debug.Log("Cancelling CenterPlayer coroutine.");
+			PlayerCurrentlyCentering = false;
+		}
 	}
 	
 	/// <summary>
@@ -52,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 	/// (it's parent's) transform.position.
 	/// </summary>
 	public IEnumerator CenterPlayer(Vector3 centerVector) {
+		PlayerCurrentlyCentering = true;
 		
 		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
 		{
@@ -74,6 +82,8 @@ public class PlayerMovement : MonoBehaviour {
 				yield return null;
 			}
 		}
+		
+		PlayerCurrentlyCentering = false;
 		Debug.Log("Player centering completed.");
 	}
 	

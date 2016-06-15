@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.073704, y: 13.933401, z: -54.332314}
+  m_LocalPosition: {x: -86.90764, y: 372.13467, z: -395.22845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 405066}
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0
-  coinNoise: {fileID: 8300000, guid: 609e085b4f8752341a8249a79672e45e, type: 3}
+  playerSounds: {fileID: 0}
 --- !u!135 &13576734
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -115,7 +115,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.0658283
+  m_Radius: 1.5992737
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
