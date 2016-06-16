@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdd9fc06239fbc47a915b6d380ff164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strafeAmount: 0
+  strafeDestinationModifier: 0
   strafeSpeed: 0
   strafeFixedFrame: 0
   movementFlag: 0
@@ -195,6 +195,8 @@ MonoBehaviour:
   strafeRightFlag: 0
   inputEnabled: 0
   currentStrafeLocation: 0
+  strafeAmount: 0
+  strafeCenter: 0
 --- !u!23 &529195516
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -278,7 +280,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 609e085b4f8752341a8249a79672e45e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1126,6 +1128,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1847253619}
   - 114: {fileID: 1847253620}
+  - 114: {fileID: 1847253621}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1156,3 +1159,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099d63ab6f1d14e4ba1136cbca8a89d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1847253621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847253618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f30f133fbc7d0f43bf933e3a3eca1ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StraightPiecePool: []
+  RightTurnPiecePool: []
+  LeftTurnPiecePool: []

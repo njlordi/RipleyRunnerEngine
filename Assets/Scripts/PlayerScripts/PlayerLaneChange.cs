@@ -29,7 +29,7 @@ public class PlayerLaneChange : MonoBehaviour
     void Awake()
     {
 	    strafeAmount = 4.0f;
-	    strafeSpeed = 5.0f;
+	    strafeSpeed = 10.0f;
 	    strafeDestinationModifier = 0.0f;
 	    strafeResponsivenessLevel = 0.5f;
     }

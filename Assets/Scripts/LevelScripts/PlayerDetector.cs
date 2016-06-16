@@ -67,6 +67,10 @@ public class PlayerDetector : MonoBehaviour {
 				transform.parent.rotation * Quaternion.AngleAxis(90f, Vector3.up));
 			break;
 			
+			
+			
+		/*	Scrapping this? Not sure yet...
+			
 		case "tIntersectionPiece": // focus on this later!
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position - transform.parent.right * 100.0f, 
@@ -78,7 +82,7 @@ public class PlayerDetector : MonoBehaviour {
 			
 			//GameManager.axisDirection = GameManager.MapSpawnDirection.tBranch;
 			break;
-			
+		*/	
 		default:
 			break;
 		}
