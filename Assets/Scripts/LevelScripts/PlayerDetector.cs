@@ -46,28 +46,36 @@ public class PlayerDetector : MonoBehaviour {
 		switch(currentPieceTag) {
 				
 		case "StraightPiece":	// YOU WALKED ONTO A STRAIGHT PIECE SO.....
+			GameObject.FindGameObjectWithTag("GameManager")
+				.GetComponent<PiecePlacer>().PlaceRandomPiece(gameObject);
+			/*
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position + transform.parent.forward * 100.0f, 
 				transform.parent.rotation);
+			*/
 			break;
 			
 		case "LeftTurnPiece":   // YOU WALKED ONTO A LEFT ANGLE PIECE SO.....
 			GameManager.DirectionToSpawnShiftLeft();
+			
+			/*
 			pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position - transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(-90f, Vector3.up));
+			*/
 			break;
 			
 		case "RightTurnPiece":  // YOU WALKED ONTO A RIGHT ANGLE PIECE SO.....
 			GameManager.DirectionToSpawnShiftRight();
+			
+			/*
 			pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 			go = (GameObject)Instantiate(Resources.Load(pieceSelection), 
 				transform.parent.position + transform.parent.right * 100.0f, 
 				transform.parent.rotation * Quaternion.AngleAxis(90f, Vector3.up));
+			*/
 			break;
-			
-			
 			
 		/*	Scrapping this? Not sure yet...
 			
