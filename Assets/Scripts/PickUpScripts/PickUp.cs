@@ -5,6 +5,10 @@ public class PickUp : MonoBehaviour {
 	public float rotationSpeed;
 	public PlayerSounds playerSounds;
 	
+	void OnEnable() {
+		
+	}
+	
 	// Use this for initialization
 	void Start () {
 		rotationSpeed = 250.0f;
@@ -23,7 +27,7 @@ public class PickUp : MonoBehaviour {
 		PlayerStats.pickUpsCollected++;
 		
 		// (remove later with pooling)
-		Destroy(gameObject);
+		gameObject.SetActive(false);
 		
 		/* Save this for object pooling later...
 		gameObject.SetActive(false);
@@ -32,6 +36,6 @@ public class PickUp : MonoBehaviour {
 	
 	void OnDisable() {
 		// (remove later with pooling)
-		Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 }

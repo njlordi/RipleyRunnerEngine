@@ -4,16 +4,16 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 	
 	public enum MapSpawnDirection {facingZ, facingNegX, facingX};
-	public static MapSpawnDirection axisDirection;
+	public static MapSpawnDirection axisDirection = MapSpawnDirection.facingZ;
 	
 	public static string[] pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "StraightPiece"};
 	
-	// Update is called every frame, if the MonoBehaviour is enabled.
+	/*
 	void Start()
 	{
 		// Game starts building towards Z
 		axisDirection = MapSpawnDirection.facingZ;
-	}
+	}*/
 	
 	public static void DirectionToSpawnShiftLeft() {
 		
