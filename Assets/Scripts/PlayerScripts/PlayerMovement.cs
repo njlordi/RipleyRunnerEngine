@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour {
 				|| this.transform.position.x > (centerVector.x + 0.1f))  
 			{
 				Debug.Log("Lerp Frames to X");
-				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 12.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
 		}
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour {
 			while (this.transform.position.z < (centerVector.z - 0.1f) 
 				|| this.transform.position.z > (centerVector.z + 0.1f)) {
 				Debug.Log("Lerp Frames to X");
-				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 12.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
 		}
