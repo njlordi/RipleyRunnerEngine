@@ -55,25 +55,21 @@ public class PlayerMovement : MonoBehaviour {
 	
 	/// <summary>
 	/// This coroutine centers the player on the current piece.
-	/// It is called from TurnTrigger.cs which passes the current piece
-	/// (it's parent's) transform.position.
+	/// It is called from TurnTrigger.cs which passes the 
+	/// current piece's transform.position.
 	/// </summary>
 	public IEnumerator CenterPlayer(Vector3 centerVector) {
 		PlayerCurrentlyCentering = true;
 		
-		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ)
-		{
+		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ) {
 			Debug.Log("Lerping player towards target X value");
 			while (this.transform.position.x < (centerVector.x - 0.1f) 
-				|| this.transform.position.x > (centerVector.x + 0.1f))  
-			{
+				|| this.transform.position.x > (centerVector.x + 0.1f)) {
 				Debug.Log("Lerp Frames to X");
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
-		}
-		else
-		{
+		} else {
 			Debug.Log("Lerping player towards target Z value");
 			while (this.transform.position.z < (centerVector.z - 0.1f) 
 				|| this.transform.position.z > (centerVector.z + 0.1f)) {

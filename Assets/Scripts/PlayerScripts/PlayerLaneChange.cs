@@ -53,57 +53,61 @@ public class PlayerLaneChange : MonoBehaviour
 
 		if (Input.GetKey(KeyCode.A) && inputEnabled == true)
 		{
-			inputEnabled = false;
-			if (currentStrafeLocation == StrafeLocation.center)
-				SlideToLeftLane();
-			else if (currentStrafeLocation != StrafeLocation.left)
-				SlideToCenterLane();
+			StrafeLeft();
 		}
 		if (Input.GetKey(KeyCode.D) && inputEnabled == true)
 		{
-			inputEnabled = false;
-			if (currentStrafeLocation == StrafeLocation.center)
-				SlideToRightLane();
-			else if (currentStrafeLocation != StrafeLocation.right)
-				SlideToCenterLane();
+			StrafeRight();
 		}
 		
-		if (strafeLeftFlag)
-			SlideToLeftLane();
-			
-        if (strafeRightFlag)
-			SlideToRightLane();
-			
 		Vector3 tempVector = transform.localPosition;
 		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
 		transform.localPosition = tempVector;
 		
+		SetEnumToCorrectLane();
+		
+	}
+	
+	/// <summary>
+	/// Determines what lane the player is currently in 
+	/// and sets StrafeLocation to that enum value.
+	/// </summary>
+	void SetEnumToCorrectLane() {
 		if (transform.localPosition.x >= strafeAmount - strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.right;
-			inputEnabled = true;
+			//inputEnabled = true;
 		}
 		if (transform.localPosition.x <= -(strafeAmount - strafeResponsivenessLevel)) {
 			currentStrafeLocation = StrafeLocation.left;
-			inputEnabled = true;
+			//inputEnabled = true;
 		}
 		if (transform.localPosition.x < strafeResponsivenessLevel 
 			&& transform.localPosition.x > -strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.center;
-			inputEnabled = true;
+			//inputEnabled = true;
 			}
 	}
 	
-	public void SlideToLeftLane()
+	public void StrafeLeft()
 	{
-		strafeDestinationModifier = -strafeAmount;
+		//inputEnabled = false;
+		if (currentStrafeLocation == StrafeLocation.center)
+			strafeDestinationModifier = -strafeAmount;
+		else if (currentStrafeLocation != StrafeLocation.left)
+			GoToCenterLane();
 	}
 	
-	public void SlideToRightLane()
+	public void StrafeRight()
 	{
-		strafeDestinationModifier = strafeAmount;
+		//inputEnabled = false;
+		if (currentStrafeLocation == StrafeLocation.center)
+			strafeDestinationModifier = strafeAmount;
+		else if (currentStrafeLocation != StrafeLocation.right)
+			GoToCenterLane();
+		
 	}
 	
-	public void SlideToCenterLane() 
+	public void GoToCenterLane() 
 	{
 		strafeDestinationModifier = strafeCenter;
 	}
