@@ -15,9 +15,9 @@ public class TurnTrigger : MonoBehaviour {
 	}
 	
 	void OnTriggerExit(Collider other) {
-		//GetComponent<BoxCollider>().isTrigger = false;
 		if (other.tag == "Player") {
-			other.GetComponentInParent<PlayerMovement>().StartCoroutine("CenterPlayer", transform.parent.position);
+			other.GetComponentInParent<PlayerMovement>()
+				.StartCoroutine("CenterPlayer", transform.parent.position);
 		}
 	}
 }

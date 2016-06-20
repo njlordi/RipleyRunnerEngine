@@ -3,19 +3,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerLaneChange : MonoBehaviour
-{
+public class PlayerLaneChange : MonoBehaviour {
 	public float strafeDestinationModifier;
 	public float strafeSpeed;
 	public float strafeFixedFrame;
 	
-	public bool movementFlag;
-	
-    // rename these next two?
-	public bool strafeLeftFlag;
-	public bool strafeRightFlag;
-	
 	public bool inputEnabled;
+	bool movementFlag;
 	
 	public enum StrafeLocation { left, center, right };
 	public StrafeLocation currentStrafeLocation;
@@ -26,44 +20,35 @@ public class PlayerLaneChange : MonoBehaviour
 	
 	
     // Use this for initialization
-    void Awake()
-    {
+    void Awake() {
+	    movementFlag = false;
 	    strafeAmount = 4.0f;
 	    strafeSpeed = 10.0f;
 	    strafeDestinationModifier = 0.0f;
-	    strafeResponsivenessLevel = 0.5f;
+	    strafeResponsivenessLevel = 0.3f;
     }
 
-    void Start()
-	{
-		movementFlag = false;
-		strafeLeftFlag = false;
-		strafeRightFlag = false;
-		
+    void Start() {	
 		currentStrafeLocation = StrafeLocation.center;
 		strafeDestinationModifier = 0.0f;
 		inputEnabled = true;
 	}
 	
     // Update is called once per frame
-	void Update()
-	{
+	void Update() {
 	    // fixed frame variable for movement
 		strafeFixedFrame = strafeSpeed * Time.deltaTime;
 
-		if (Input.GetKey(KeyCode.A) && inputEnabled == true)
-		{
+		if (Input.GetKey(KeyCode.A) && inputEnabled == true) {
 			StrafeLeft();
 		}
-		if (Input.GetKey(KeyCode.D) && inputEnabled == true)
-		{
+		if (Input.GetKey(KeyCode.D) && inputEnabled == true) {
 			StrafeRight();
 		}
 		
 		Vector3 tempVector = transform.localPosition;
 		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
 		transform.localPosition = tempVector;
-		
 		SetEnumToCorrectLane();
 		
 	}
@@ -75,31 +60,29 @@ public class PlayerLaneChange : MonoBehaviour
 	void SetEnumToCorrectLane() {
 		if (transform.localPosition.x >= strafeAmount - strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.right;
-			//inputEnabled = true;
+			inputEnabled = true;
 		}
 		if (transform.localPosition.x <= -(strafeAmount - strafeResponsivenessLevel)) {
 			currentStrafeLocation = StrafeLocation.left;
-			//inputEnabled = true;
+			inputEnabled = true;
 		}
 		if (transform.localPosition.x < strafeResponsivenessLevel 
 			&& transform.localPosition.x > -strafeResponsivenessLevel) {
 			currentStrafeLocation = StrafeLocation.center;
-			//inputEnabled = true;
+			inputEnabled = true;
 			}
 	}
 	
-	public void StrafeLeft()
-	{
-		//inputEnabled = false;
+	public void StrafeLeft() {
+		inputEnabled = false;
 		if (currentStrafeLocation == StrafeLocation.center)
 			strafeDestinationModifier = -strafeAmount;
 		else if (currentStrafeLocation != StrafeLocation.left)
 			GoToCenterLane();
 	}
 	
-	public void StrafeRight()
-	{
-		//inputEnabled = false;
+	public void StrafeRight() {
+		inputEnabled = false;
 		if (currentStrafeLocation == StrafeLocation.center)
 			strafeDestinationModifier = strafeAmount;
 		else if (currentStrafeLocation != StrafeLocation.right)
@@ -107,8 +90,7 @@ public class PlayerLaneChange : MonoBehaviour
 		
 	}
 	
-	public void GoToCenterLane() 
-	{
+	public void GoToCenterLane() {
 		strafeDestinationModifier = strafeCenter;
 	}
 }

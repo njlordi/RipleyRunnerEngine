@@ -8,13 +8,6 @@ public class GameManager : MonoBehaviour {
 	
 	public static string[] pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "RightTurnPiece", "StraightPiece"};
 	
-	/*
-	void Start()
-	{
-		// Game starts building towards Z
-		axisDirection = MapSpawnDirection.facingZ;
-	}*/
-	
 	public static void DirectionToSpawnShiftLeft() {
 		
 		if (axisDirection == MapSpawnDirection.facingX) {
