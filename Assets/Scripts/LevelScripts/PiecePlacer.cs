@@ -12,7 +12,6 @@ public class PiecePlacer : MonoBehaviour {
 	public GameObject RightTurnPiece;
 	
 	public int universalPoolSize;
-	
 	public GameObject [] StraightPiecePool;
 	public GameObject [] LeftTurnPiecePool;
 	public GameObject [] RightTurnPiecePool;
@@ -51,20 +50,17 @@ public class PiecePlacer : MonoBehaviour {
 	GameObject GetRandomPiece(){
 		int randArrayIndex = Random.Range(0, 4);
 		string pieceSelection = GameManager.pieceTagArray[randArrayIndex];
-		GameObject randomPieceToPlace;
+		//GameObject randomPieceToPlace;
 		
 		switch(pieceSelection) {
 		case "StraightPiece":
 			return GetPooledStraightPiece();
-			break;
 			
 		case "LeftTurnPiece":
 			return GetPooledLeftTurnPiece();
-			break;
 			
 		case "RightTurnPiece":
 			return GetPooledRightTurnPiece();
-			break;
 		default:
 			return null;
 			break;

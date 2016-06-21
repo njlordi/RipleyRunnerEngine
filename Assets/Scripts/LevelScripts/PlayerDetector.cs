@@ -1,37 +1,43 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script is attached to a box collider. 
+/// The box collider is a child of the game piece 
+/// that the player is walking on.
+/// </summary>
 public class PlayerDetector : MonoBehaviour {
 	float destroyDelayInSeconds;
+	PiecePlacer piecePlacerReference;
+	PlayerMovement playerMovementReference;
 	
 	void Awake() {
 		destroyDelayInSeconds = 0.5f;
+		piecePlacerReference = GameObject.FindGameObjectWithTag("GameManager")
+			.GetComponent<PiecePlacer>();
+		playerMovementReference = GameObject.GetComponentInParent<PlayerMovement>();
 	}
 	
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Player")
-			spawnNext();
+			SpawnNext();
 	}
 	
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "Player") {
-			Debug.Log ("Stopping centering coroutine in PlayerMovement script.");
-			other.GetComponentInParent<PlayerMovement>().KillCenterPlayerCoroutine();
+			playerMovementReference.KillCenterPlayerCoroutine();
 			StartCoroutine("DisableParent");
 		}
 	}
 	
-	void spawnNext() {
-		// BAD CODE... REWRITE
-		GameObject.FindGameObjectWithTag("GameManager")
-				.GetComponent<PiecePlacer>().PlaceRandomPiece(transform.parent.gameObject);
-
+	void SpawnNext() {
+		if (piecePlacerReference != null)
+			piecePlacerReference.PlaceRandomPiece(transform.parent.gameObject);
 	}
 	
 	IEnumerator DisableParent() {
 		// This should be made relative to player runSpeed later on...
 		yield return new WaitForSeconds(destroyDelayInSeconds);
-		Debug.Log("Disabling piece...");
 		transform.parent.gameObject.SetActive(false);
 	}
 }
