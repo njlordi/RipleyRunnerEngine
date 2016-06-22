@@ -15,7 +15,7 @@ public class PlayerDetector : MonoBehaviour {
 		destroyDelayInSeconds = 0.5f;
 		piecePlacerReference = GameObject.FindGameObjectWithTag("GameManager")
 			.GetComponent<PiecePlacer>();
-		playerMovementReference = GameObject.GetComponentInParent<PlayerMovement>();
+		playerMovementReference = GameObject.FindGameObjectWithTag("PlayerGeneralLocation").GetComponent<PlayerMovement>();
 	}
 	
 	void OnTriggerEnter(Collider other) {

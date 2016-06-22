@@ -3,12 +3,14 @@ using System.Collections;
 
 public class PlayerSounds : MonoBehaviour {
 	AudioSource audioSource;
+	public bool MutePlayerAudio;
 	
 	void Start() {
 		audioSource = GetComponent<AudioSource>();
 	}
 	
 	public void PlayPickUpNoise() {
-		audioSource.Play();
+		if (!MutePlayerAudio)
+			audioSource.Play();
 	}
 }

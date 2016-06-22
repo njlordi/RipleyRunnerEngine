@@ -9,7 +9,6 @@ public class PlayerLaneChange : MonoBehaviour {
 	public float strafeFixedFrame;
 	
 	public bool inputEnabled;
-	bool movementFlag;
 	
 	public enum StrafeLocation { left, center, right };
 	public StrafeLocation currentStrafeLocation;
@@ -18,10 +17,8 @@ public class PlayerLaneChange : MonoBehaviour {
 	
 	float strafeResponsivenessLevel;
 	
-	
     // Use this for initialization
     void Awake() {
-	    movementFlag = false;
 	    strafeAmount = 4.0f;
 	    strafeSpeed = 10.0f;
 	    strafeDestinationModifier = 0.0f;
@@ -47,10 +44,13 @@ public class PlayerLaneChange : MonoBehaviour {
 		}
 		
 		Vector3 tempVector = transform.localPosition;
-		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
-		transform.localPosition = tempVector;
-		SetEnumToCorrectLane();
 		
+		if (transform.position.x != strafeDestinationModifier) {
+		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
+			transform.localPosition = tempVector;
+		}
+		
+		SetEnumToCorrectLane();
 	}
 	
 	/// <summary>

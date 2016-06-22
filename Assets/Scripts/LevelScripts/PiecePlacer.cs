@@ -50,7 +50,6 @@ public class PiecePlacer : MonoBehaviour {
 	GameObject GetRandomPiece(){
 		int randArrayIndex = Random.Range(0, 4);
 		string pieceSelection = GameManager.pieceTagArray[randArrayIndex];
-		//GameObject randomPieceToPlace;
 		
 		switch(pieceSelection) {
 		case "StraightPiece":
@@ -63,7 +62,6 @@ public class PiecePlacer : MonoBehaviour {
 			return GetPooledRightTurnPiece();
 		default:
 			return null;
-			break;
 		}
 	}
 	
