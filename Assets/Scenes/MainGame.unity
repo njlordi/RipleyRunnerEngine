@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a5c6184600c45d3a0527cb03eeae3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MutePlayerAudio: 0
+  MutePlayerAudio: 1
 --- !u!82 &529195521
 AudioSource:
   m_ObjectHideFlags: 0
