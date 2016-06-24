@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
 		
 		if (this.transform.rotation == targetRotation) {
-			turnInputEnabled = true; //remove?
+			turnInputEnabled = true;
 		} else {
 			this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 		}

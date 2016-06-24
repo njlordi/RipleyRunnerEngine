@@ -11,7 +11,7 @@ public class PlayerJump : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			rb.velocity = new Vector3 (0, 10, 0);
+			rb.velocity = new Vector3 (0, 8, 0);
 		}
 	}
 }
