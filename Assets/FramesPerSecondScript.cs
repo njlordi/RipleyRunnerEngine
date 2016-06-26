@@ -16,7 +16,7 @@ public class FramesPerSecondScript : MonoBehaviour {
 	}
 	
 	void Update () {
-        ++frames;
+        frames++;
         if (Time.time > nextTime) {
             fpsText.text = "FPS: " + frames.ToString();
             frames = 0;
