@@ -21,9 +21,9 @@ public class PlayerJump : MonoBehaviour
     void Update()
     {
 
-        down = this.transform.TransformDirection(Vector3.down);
+		down = (this.transform.TransformDirection(Vector3.down));
 
-        Debug.DrawLine(this.transform.position, down);
+		Debug.DrawRay(this.transform.position + (Vector3.down * 0.1f), down, Color.red);
 
         if (IsGrounded())
             Debug.Log("Touching the ground");
@@ -36,7 +36,7 @@ public class PlayerJump : MonoBehaviour
 
     public bool IsGrounded()
     {
-        if (Physics.Raycast(this.transform.position, down, out rh, 0.1f))
+		if (Physics.Raycast(this.transform.position + (Vector3.down * 0.1f), down, out rh, 0.5f))
         {
             return true;
         }

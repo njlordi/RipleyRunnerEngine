@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1212263f2fcc342a4e7510e059b42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDestructable: 0
 --- !u!1001 &377434580
 Prefab:
   m_ObjectHideFlags: 0
@@ -715,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa21843a2cb3ba4b82161a760c2c91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 50
+  runSpeed: 0
   turnSpeed: 0
   turnInputEnabled: 0
 --- !u!1 &1050649477
