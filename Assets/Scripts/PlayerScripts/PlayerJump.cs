@@ -6,8 +6,11 @@ public class PlayerJump : MonoBehaviour
     Rigidbody rb;
     //public float jumpSpeed;
     public float jumpHeight;
+	public bool jumpInput;
 
-    Vector3 down;
+	public float rayLength;
+	Vector3 rayDirection;
+
     RaycastHit rh;
 
     // Use this for initialization
@@ -15,32 +18,36 @@ public class PlayerJump : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         jumpHeight = 8;
+		rayLength = 1.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
+		rayDirection = this.transform.TransformDirection(Vector3.down);
 
-		down = (this.transform.TransformDirection(Vector3.down));
-
-		Debug.DrawRay(this.transform.position + (Vector3.down * 0.1f), down, Color.red);
+		Debug.DrawRay(this.transform.position, rayDirection, Color.red);
 
         if (IsGrounded())
             Debug.Log("Touching the ground");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && jumpInput)
         {
-            rb.velocity = new Vector3(0, jumpHeight, 0);
+			rb.velocity = new Vector3(0, jumpHeight, 0);
         }
     }
 
     public bool IsGrounded()
-    {
-		if (Physics.Raycast(this.transform.position + (Vector3.down * 0.1f), down, out rh, 0.5f))
-        {
-            return true;
-        }
-        else
-            return false;
-    }
+	{
+		if (Physics.Raycast (this.transform.position, rayDirection, out rh, rayLength)) {
+			
+			if (rh.collider.tag == "StraightPiece") {
+				jumpInput = true;
+				return true;
+			}
+		}
+			
+		jumpInput = false;
+		return false;
+	}
 }

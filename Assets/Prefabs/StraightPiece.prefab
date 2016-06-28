@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6553956}
   - 23: {fileID: 2384754}
   - 114: {fileID: 11497258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - 33: {fileID: 3319426}
   - 65: {fileID: 6559736}
   - 23: {fileID: 2353332}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RoadForTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
