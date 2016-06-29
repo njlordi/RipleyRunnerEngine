@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour {
 	Quaternion targetRotation;
 	public bool turnInputEnabled;
 	bool PlayerCurrentlyCentering;
+
+    /* Possibly obsolete when using KillCenterPlayerCoroutine()
+       or perhaps KillCenterPlayerCoroutine() should be scrapped?*/
+    float playerCenteringPrecision;
 	
 	void Awake () {
 		degreesToTurn = 0.0f;
@@ -16,7 +20,9 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Start() {
-		PlayerCurrentlyCentering = false;
+        playerCenteringPrecision = 0.001f;
+
+        PlayerCurrentlyCentering = false;
 		turnInputEnabled = true;
 		GroundPiece.MoveLeft();
 	}
@@ -63,16 +69,16 @@ public class PlayerMovement : MonoBehaviour {
 		
 		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ) {
 			Debug.Log("Lerping player towards target X value");
-			while (this.transform.position.x < (centerVector.x - 0.1f) 
-				|| this.transform.position.x > (centerVector.x + 0.1f)) {
+			while (this.transform.position.x < (centerVector.x - playerCenteringPrecision) 
+				|| this.transform.position.x > (centerVector.x + playerCenteringPrecision)) {
 				Debug.Log("Lerp Frames to X");
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
 		} else {
 			Debug.Log("Lerping player towards target Z value");
-			while (this.transform.position.z < (centerVector.z - 0.1f) 
-				|| this.transform.position.z > (centerVector.z + 0.1f)) {
+			while (this.transform.position.z < (centerVector.z - playerCenteringPrecision) 
+				|| this.transform.position.z > (centerVector.z + playerCenteringPrecision)) {
 				Debug.Log("Lerp Frames to X");
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;

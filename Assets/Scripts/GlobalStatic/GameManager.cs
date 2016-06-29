@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	
+    public bool isTimePaused;
+
 	public enum MapSpawnDirection {facingZ, facingNegX, facingX};
 	public static MapSpawnDirection axisDirection = MapSpawnDirection.facingZ;
 	
@@ -28,4 +29,18 @@ public class GameManager : MonoBehaviour {
 			pieceTagArray = new string[]{"StraightPiece", "LeftTurnPiece", "LeftTurnPiece", "StraightPiece"};
 		}
 	}
+
+    public void TimeBasedPause()
+    {
+        if (!isTimePaused)
+        {
+            Time.timeScale = 0;
+            isTimePaused = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            isTimePaused = false;
+        }
+    }
 }
