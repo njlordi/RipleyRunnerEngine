@@ -17,17 +17,19 @@ public class PlayerDetector : MonoBehaviour {
 			.GetComponent<PiecePlacer>();
 		playerMovementReference = GameObject.FindGameObjectWithTag("PlayerGeneralLocation").GetComponent<PlayerMovement>();
 	}
-	
+
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Player")
 			SpawnNext();
 	}
 	
 	void OnTriggerExit(Collider other) {
-		if (other.tag == "Player") {
+		if (other.tag == "Player" 
+			&& (this.transform.parent.tag == "RightTurnPiece" || this.transform.parent.tag == "LeftTurnPiece")) {
 			playerMovementReference.KillCenterPlayerCoroutine();
-			StartCoroutine("DisableParent");
+			Debug.Log ("Player-centering coroutine stopped from PlayerDetector.cs"); 
 		}
+		StartCoroutine("DisableParent");
 	}
 	
 	void SpawnNext() {

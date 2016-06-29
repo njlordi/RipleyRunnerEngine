@@ -3,11 +3,12 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 	public float runSpeed;
-	public float turnSpeed;
+	float turnSpeed;
+	public float turnSpeedModifier;
 	float degreesToTurn;
 	
 	Quaternion targetRotation;
-	public bool turnInputEnabled;
+    bool turnInputEnabled;
 	bool PlayerCurrentlyCentering;
 
     /* Possibly obsolete when using KillCenterPlayerCoroutine()
@@ -20,15 +21,15 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	void Start() {
-        playerCenteringPrecision = 0.001f;
-
+        playerCenteringPrecision = 0;
         PlayerCurrentlyCentering = false;
 		turnInputEnabled = true;
+		turnSpeedModifier = 4.8355f; // funky number, math research?
 		GroundPiece.MoveLeft();
 	}
 	
 	void Update () {
-		turnSpeed = runSpeed * 5.0f;
+		turnSpeed = runSpeed * turnSpeedModifier;
 		
 		this.transform.Translate(Vector3.forward * Time.deltaTime * runSpeed);
 		
@@ -54,7 +55,6 @@ public class PlayerMovement : MonoBehaviour {
 	public void KillCenterPlayerCoroutine() {
 		if (PlayerCurrentlyCentering) {
 			StopCoroutine("CenterPlayer");
-			Debug.Log("Cancelling CenterPlayer coroutine.");
 			PlayerCurrentlyCentering = false;
 		}
 	}
@@ -68,18 +68,14 @@ public class PlayerMovement : MonoBehaviour {
 		PlayerCurrentlyCentering = true;
 		
 		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ) {
-			Debug.Log("Lerping player towards target X value");
 			while (this.transform.position.x < (centerVector.x - playerCenteringPrecision) 
 				|| this.transform.position.x > (centerVector.x + playerCenteringPrecision)) {
-				Debug.Log("Lerp Frames to X");
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
 		} else {
-			Debug.Log("Lerping player towards target Z value");
 			while (this.transform.position.z < (centerVector.z - playerCenteringPrecision) 
 				|| this.transform.position.z > (centerVector.z + playerCenteringPrecision)) {
-				Debug.Log("Lerp Frames to X");
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}

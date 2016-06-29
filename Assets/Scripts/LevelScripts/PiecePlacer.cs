@@ -104,7 +104,6 @@ public class PiecePlacer : MonoBehaviour {
 	/// Fetches a Straight-Piece from the pool.
 	/// </summary>
 	public GameObject GetPooledStraightPiece() {
-		Debug.Log("Getting straight piece.");
 		for (int i = 0; i < StraightPiecePool.Length; i++) {
 			if(!StraightPiecePool[i].activeInHierarchy) {
 				return StraightPiecePool[i];
