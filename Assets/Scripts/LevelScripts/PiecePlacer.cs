@@ -10,44 +10,53 @@ public class PiecePlacer : MonoBehaviour {
 	public GameObject StraightPiece;
 	public GameObject LeftTurnPiece;
 	public GameObject RightTurnPiece;
-	
-	public int universalPoolSize;
+    public GameObject IntersectionPiece;
+
+    public int universalPoolSize;
 	public GameObject [] StraightPiecePool;
 	public GameObject [] LeftTurnPiecePool;
 	public GameObject [] RightTurnPiecePool;
-	
-	void Awake() {
+    public GameObject [] IntersectionPiecePool;
+
+    void Awake() {
 
 		universalPoolSize = 4;
 		
 		StraightPiecePool = new GameObject[universalPoolSize];
 		LeftTurnPiecePool = new GameObject[universalPoolSize];
 		RightTurnPiecePool = new GameObject[universalPoolSize];
-		
+        IntersectionPiecePool = new GameObject[universalPoolSize];
+
 		for (int i = 0; i < universalPoolSize; i++) {
-			StraightPiecePool[i] = (GameObject)Instantiate(StraightPiece);
-			StraightPiecePool[i].SetActive(false);
+            StraightPiecePool[i] = (GameObject)Instantiate(StraightPiece);
+            StraightPiecePool[i].SetActive(false);
 			LeftTurnPiecePool[i] = (GameObject)Instantiate(LeftTurnPiece);
 			LeftTurnPiecePool[i].SetActive(false);
 			RightTurnPiecePool[i] = (GameObject)Instantiate(RightTurnPiece);
 			RightTurnPiecePool[i].SetActive(false);
-		}
+            IntersectionPiecePool[i] = (GameObject)Instantiate(IntersectionPiece);
+            IntersectionPiecePool[i].SetActive(false);
+        }
 	}
 	
 	// make this static later??? that would be best
 	public void PlaceRandomPiece(GameObject previousPiece) {
 		if (previousPiece.tag == "StraightPiece") {
-			PlacePieceStraightAhead(previousPiece, GetRandomPiece());
+			PlacePieceStraightAhead(previousPiece, GetValidRandomPiece());
 		} else if (previousPiece.tag == "LeftTurnPiece") {
 			GameManager.DirectionToSpawnShiftLeft();
-			PlacePieceOnTheLeft(previousPiece, GetRandomPiece());
+			PlacePieceOnTheLeft(previousPiece, GetValidRandomPiece());
 		} else if (previousPiece.tag == "RightTurnPiece") {
 			GameManager.DirectionToSpawnShiftRight();
-			PlacePieceOnTheRight(previousPiece, GetRandomPiece());
+			PlacePieceOnTheRight(previousPiece, GetValidRandomPiece());
 		}
 	}
 	
-	GameObject GetRandomPiece(){
+    /// <summary>
+    /// Returns a random piece based on which direction the level is building towards.
+    /// (TYPE OF PIECE IS DETERMINED BY GAMEMANAGER.CS)
+    /// </summary>
+	GameObject GetValidRandomPiece(){
 		int randArrayIndex = Random.Range(0, 4);
 		string pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 		
@@ -68,8 +77,6 @@ public class PiecePlacer : MonoBehaviour {
 	/// <summary>
 	/// Place a piece that would fit at the end of a straight piece.
 	/// </summary>
-	/// <param name="previousPiece">Straight-Piece that triggered this piece to be placed</param>
-	/// <param name="nextPiece">Piece to be placed and enabled</param>
 	public void PlacePieceStraightAhead(GameObject previousPiece, GameObject nextPiece) {
 		nextPiece.transform.position = previousPiece.transform.position + previousPiece.transform.forward * 100.0f; 
 		nextPiece.transform.rotation = previousPiece.transform.rotation;
@@ -79,8 +86,6 @@ public class PiecePlacer : MonoBehaviour {
 	/// <summary>
 	/// Place a piece that would fit at the end of a left-turn piece.
 	/// </summary>
-	/// <param name="previousPiece">Left-Turn-Piece that triggered this piece to be placed</param>
-	/// <param name="nextPiece">Piece to be placed and enabled</param>
 	public void PlacePieceOnTheLeft(GameObject previousPiece, GameObject nextPiece) {
 		nextPiece.transform.position = previousPiece.transform.position - previousPiece.transform.right * 100.0f; 
 		nextPiece.transform.rotation = previousPiece.transform.rotation
@@ -91,8 +96,6 @@ public class PiecePlacer : MonoBehaviour {
 	/// <summary>
 	/// Place a piece that would fit at the end of a right-turn piece.
 	/// </summary>
-	/// <param name="previousPiece">Right-Turn-Piece that triggered this piece to be placed</param>
-	/// <param name="nextPiece">Piece to be placed and enabled</param>
 	public void PlacePieceOnTheRight(GameObject previousPiece, GameObject nextPiece) {
 		nextPiece.transform.position = previousPiece.transform.position + previousPiece.transform.right * 100.0f; 
 		nextPiece.transform.rotation = previousPiece.transform.rotation

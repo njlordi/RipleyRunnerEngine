@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1212263f2fcc342a4e7510e059b42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDestructable: 0
+  isDestructable: 1
 --- !u!1001 &377434580
 Prefab:
   m_ObjectHideFlags: 0
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa21843a2cb3ba4b82161a760c2c91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 100
+  runSpeed: 300
   turnSpeedModifier: 0
 --- !u!1 &1258843882
 GameObject:
@@ -1345,7 +1345,9 @@ MonoBehaviour:
   StraightPiece: {fileID: 197088, guid: 5ee3917a86f8c3a4283c0314700b4e73, type: 2}
   LeftTurnPiece: {fileID: 159576, guid: 78167446fba085f45a4a936a14182231, type: 2}
   RightTurnPiece: {fileID: 187250, guid: 5e67cbb8377fbb1499b440d821ffa48e, type: 2}
+  IntersectionPiece: {fileID: 194130, guid: ea638bae3db7d964e81daea224b717aa, type: 2}
   universalPoolSize: 0
   StraightPiecePool: []
   LeftTurnPiecePool: []
   RightTurnPiecePool: []
+  IntersectionPiecePool: []
