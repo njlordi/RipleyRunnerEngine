@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour {
     /* Possibly obsolete when using KillCenterPlayerCoroutine()
        or perhaps KillCenterPlayerCoroutine() should be scrapped?*/
     float playerCenteringPrecision;
+
+	// for debugging only... delete later?
+	public float OffCenterAmount;
 	
 	void Awake () {
 		degreesToTurn = 0.0f;
@@ -24,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
         playerCenteringPrecision = 0;
         PlayerCurrentlyCentering = false;
 		turnInputEnabled = true;
-		turnSpeedModifier = 4.8355f; // funky number, math research?
+		turnSpeedModifier = 5f; // 5 is best... math research?
 		GroundPiece.MoveLeft();
 	}
 	
@@ -66,14 +69,19 @@ public class PlayerMovement : MonoBehaviour {
 	/// </summary>
 	public IEnumerator CenterPlayer(Vector3 centerVector) {
 		PlayerCurrentlyCentering = true;
+
 		
 		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ) {
+			OffCenterAmount = centerVector.x - this.transform.position.x;
+
 			while (this.transform.position.x < (centerVector.x - playerCenteringPrecision) 
 				|| this.transform.position.x > (centerVector.x + playerCenteringPrecision)) {
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
 				yield return null;
 			}
 		} else {
+			OffCenterAmount = centerVector.z - this.transform.position.z;
+
 			while (this.transform.position.z < (centerVector.z - playerCenteringPrecision) 
 				|| this.transform.position.z > (centerVector.z + playerCenteringPrecision)) {
 				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 5.0f));
