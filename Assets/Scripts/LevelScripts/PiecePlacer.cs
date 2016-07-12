@@ -18,6 +18,9 @@ public class PiecePlacer : MonoBehaviour {
 	public GameObject [] RightTurnPiecePool;
     public GameObject [] IntersectionPiecePool;
 
+	// does what it says, this is used to test intersection pieces in the game world
+	public bool onlyIntersectionPieces;
+
     void Awake() {
 
 		universalPoolSize = 4;
@@ -57,7 +60,15 @@ public class PiecePlacer : MonoBehaviour {
     /// (TYPE OF PIECE IS DETERMINED BY GAMEMANAGER.CS)
     /// </summary>
 	GameObject GetValidRandomPiece(){
-		int randArrayIndex = Random.Range(0, 4);
+
+		int randArrayIndex;
+
+		if (onlyIntersectionPieces) {
+			randArrayIndex = 4;
+		} else {
+		 	randArrayIndex = Random.Range(0, 5);
+		}
+
 		string pieceSelection = GameManager.pieceTagArray[randArrayIndex];
 		
 		switch(pieceSelection) {
@@ -69,6 +80,9 @@ public class PiecePlacer : MonoBehaviour {
 			
 		case "RightTurnPiece":
 			return GetPooledRightTurnPiece();
+
+		case "IntersectionPiece":
+			return GetPooledIntersectionPiece();
 		default:
 			return null;
 		}
@@ -132,6 +146,15 @@ public class PiecePlacer : MonoBehaviour {
 		for (int i = 0; i < RightTurnPiecePool.Length; i++) {
 			if(!RightTurnPiecePool[i].activeInHierarchy) {
 				return RightTurnPiecePool[i];
+			}
+		}
+		return null;
+	}
+
+	public GameObject GetPooledIntersectionPiece() {
+		for (int i = 0; i <  IntersectionPiecePool.Length; i++) {
+			if(! IntersectionPiecePool[i].activeInHierarchy) {
+				return  IntersectionPiecePool[i];
 			}
 		}
 		return null;

@@ -11,6 +11,7 @@ TagManager:
   - Ground
   - PlayerGeneralLocation
   - GameManager
+  - IntersectionPiece
   layers:
   - Default
   - TransparentFX

@@ -786,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 50
   turnSpeedModifier: 0
+  OffCenterAmount: 0
 --- !u!1 &1258843882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,7 +1284,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1764982250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.38, z: -11.39}
+  m_LocalPosition: {x: 0, y: 5.2, z: -11.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1351,3 +1352,4 @@ MonoBehaviour:
   LeftTurnPiecePool: []
   RightTurnPiecePool: []
   IntersectionPiecePool: []
+  onlyIntersectionPieces: 1
