@@ -1352,4 +1352,4 @@ MonoBehaviour:
   LeftTurnPiecePool: []
   RightTurnPiecePool: []
   IntersectionPiecePool: []
-  onlyIntersectionPieces: 1
+  onlyIntersectionPieces: 0
