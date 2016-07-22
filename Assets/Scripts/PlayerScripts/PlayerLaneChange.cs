@@ -9,6 +9,9 @@ public class PlayerLaneChange : MonoBehaviour {
 	public float strafeFixedFrame;
 	
 	public bool inputEnabled;
+
+	// bool to display if the player us exactly in the lane
+	public bool isSnappedToLane;
 	
 	public enum StrafeLocation { left, center, right };
 	public StrafeLocation currentStrafeLocation;
@@ -45,9 +48,12 @@ public class PlayerLaneChange : MonoBehaviour {
 		
 		Vector3 tempVector = transform.localPosition;
 		
-		if (transform.position.x != strafeDestinationModifier) {
-		tempVector.x = Mathf.Lerp(tempVector.x, strafeDestinationModifier, strafeFixedFrame);
+		if (transform.localPosition.x != strafeDestinationModifier) {
+			isSnappedToLane = false;
+			tempVector.x = Mathf.Lerp (tempVector.x, strafeDestinationModifier, strafeFixedFrame);
 			transform.localPosition = tempVector;
+		} else {
+			isSnappedToLane = true;
 		}
 		
 		SetEnumToCorrectLane();
