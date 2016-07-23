@@ -15,7 +15,7 @@ public class PlayerLaneChange : MonoBehaviour
 	void Start () {
 		this.playerCurrentLane = laneLocation.center;
 		isAllowedInput = true;
-		strafeSpeed = 8.0f;
+		strafeSpeed = 20.0f;
 		strafeAmount = 4.0f;
 	}
 
@@ -28,7 +28,7 @@ public class PlayerLaneChange : MonoBehaviour
 			switch(this.playerCurrentLane) {
 
 			case laneLocation.right:
-				StartCoroutine ("StrafeToCenter");
+				StartCoroutine (StrafeToCenter(-1));
 				break;
 			case laneLocation.center:
 				StartCoroutine ("StrafeToLeftLane");
@@ -45,7 +45,7 @@ public class PlayerLaneChange : MonoBehaviour
 			switch(this.playerCurrentLane) {
 
 			case laneLocation.left:
-				StartCoroutine ("StrafeToCenter");
+				StartCoroutine (StrafeToCenter(1));
 				break;
 			case laneLocation.center:
 				StartCoroutine ("StrafeToRightLane");
@@ -58,7 +58,7 @@ public class PlayerLaneChange : MonoBehaviour
 	}
 
 	IEnumerator StrafeToLeftLane () {
-		while (this.transform.localPosition.x > -strafeAmount) {
+		while (localPosX > -strafeAmount) {
 			transform.Translate (Vector3.right * -(Time.deltaTime * strafeSpeed));
 			yield return null;
 		}
@@ -66,21 +66,24 @@ public class PlayerLaneChange : MonoBehaviour
 		isAllowedInput = true;
 	}
 
-	IEnumerator StrafeToCenter () {
-		float tempX;
-
-		while (!Mathf.Approximately(this.transform.localPosition.x, 0)) {
-
-			tempX = Mathf.Lerp (this.transform.localPosition.x, 0, Time.deltaTime * strafeSpeed);
-			this.transform.position = new Vector3 (tempX, this.transform.position.y, this.transform.position.z);
+	IEnumerator StrafeToCenter (int directionModifier) {
+		while (true) {
+			transform.Translate (Vector3.right * (directionModifier * (Time.deltaTime * strafeSpeed)));
 			yield return null;
+			if (this.playerCurrentLane == laneLocation.left && localPosX >= 0) {
+				break;
+			}
+			if (this.playerCurrentLane == laneLocation.right && localPosX <= 0) {
+				break;
+			}
+
 		}
 		this.playerCurrentLane = laneLocation.center;
 		isAllowedInput = true;
 	}
 
 	IEnumerator StrafeToRightLane () {
-		while (this.transform.localPosition.x < strafeAmount) {
+		while (localPosX < strafeAmount) {
 			transform.Translate (Vector3.right * (Time.deltaTime * strafeSpeed));
 			yield return null;
 		}
