@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerLaneChange : MonoBehaviour {
+public class OldPlayerLaneChange : MonoBehaviour {
 	public float strafeDestinationModifier;
 	public float strafeSpeed;
 	public float strafeFixedFrame;

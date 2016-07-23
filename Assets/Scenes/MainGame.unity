@@ -276,11 +276,11 @@ GameObject:
   - 33: {fileID: 529195518}
   - 136: {fileID: 529195517}
   - 23: {fileID: 529195516}
-  - 114: {fileID: 529195515}
   - 54: {fileID: 529195519}
   - 114: {fileID: 529195520}
   - 82: {fileID: 529195521}
   - 114: {fileID: 529195522}
+  - 114: {fileID: 529195515}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -309,16 +309,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 529195513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bdd9fc06239fbc47a915b6d380ff164, type: 3}
+  m_Script: {fileID: 11500000, guid: b4acd71821d7f42c3a758eefaed50ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strafeDestinationModifier: 0
-  strafeSpeed: 0
-  strafeFixedFrame: 0
-  inputEnabled: 0
-  currentStrafeLocation: 0
-  strafeAmount: 0
-  strafeCenter: 0
 --- !u!23 &529195516
 MeshRenderer:
   m_ObjectHideFlags: 0
