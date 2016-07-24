@@ -1,93 +1,102 @@
-﻿using UnityEngine;
+﻿// Written by Nick L.
+// Code for strafing in the RipleyRunner Engine
+using UnityEngine;
 using System.Collections;
 
-public class PlayerLaneChange : MonoBehaviour
-{
-	public bool isAllowedInput;
-
+public class PlayerLaneChange : MonoBehaviour {
+	public float strafeDestinationModifier;
 	public float strafeSpeed;
+	public float strafeFixedFrame;
+
+	public bool inputEnabled;
+
+	// bool to display if the player us exactly in the lane
+	public bool isSnappedToLane;
+
+	public enum StrafeLocation { left, center, right };
+	public StrafeLocation currentStrafeLocation;
 	public float strafeAmount;
-	public float localPosX;
+	public float strafeCenter = 0;
 
-	public enum laneLocation {left, center, right};
-	public laneLocation playerCurrentLane;
+	float strafeResponsivenessLevel;
 
-	void Start () {
-		this.playerCurrentLane = laneLocation.center;
-		isAllowedInput = true;
-		strafeSpeed = 20.0f;
+	// Use this for initialization
+	void Awake() {
 		strafeAmount = 4.0f;
+		strafeSpeed = 10.0f;
+		strafeDestinationModifier = 0.0f;
+		strafeResponsivenessLevel = 0.3f;
 	}
 
-	void Update () {
-		localPosX = this.transform.localPosition.x;
+	void Start() {	
+		currentStrafeLocation = StrafeLocation.center;
+		strafeDestinationModifier = 0.0f;
+		inputEnabled = true;
+	}
 
-		if (Input.GetKey (KeyCode.A) && isAllowedInput == true) {
-			isAllowedInput = false;
+	// Update is called once per frame
+	void Update() {
+		// fixed frame variable for movement
+		strafeFixedFrame = strafeSpeed * Time.deltaTime;
 
-			switch(this.playerCurrentLane) {
-
-			case laneLocation.right:
-				StartCoroutine (StrafeToCenter(-1));
-				break;
-			case laneLocation.center:
-				StartCoroutine ("StrafeToLeftLane");
-				break;
-			default:
-				isAllowedInput = true;
-				break;	
-			}
+		if (Input.GetKey(KeyCode.A) && inputEnabled == true) {
+			StrafeLeft();
+		}
+		if (Input.GetKey(KeyCode.D) && inputEnabled == true) {
+			StrafeRight();
 		}
 
-		if (Input.GetKey (KeyCode.D) && isAllowedInput == true) {
-			isAllowedInput = false;
+		Vector3 tempVector = transform.localPosition;
 
-			switch(this.playerCurrentLane) {
+		if (transform.localPosition.x != strafeDestinationModifier) {
+			isSnappedToLane = false;
+			tempVector.x = Mathf.Lerp (tempVector.x, strafeDestinationModifier, strafeFixedFrame);
+			transform.localPosition = tempVector;
+		} else {
+			isSnappedToLane = true;
+		}
 
-			case laneLocation.left:
-				StartCoroutine (StrafeToCenter(1));
-				break;
-			case laneLocation.center:
-				StartCoroutine ("StrafeToRightLane");
-				break;
-			default:
-				isAllowedInput = true;
-				break;	
-			}
+		SetEnumToCorrectLane();
+	}
+
+	/// <summary>
+	/// Determines what lane the player is currently in 
+	/// and sets StrafeLocation to that enum value.
+	/// </summary>
+	void SetEnumToCorrectLane() {
+		if (transform.localPosition.x >= strafeAmount - strafeResponsivenessLevel) {
+			currentStrafeLocation = StrafeLocation.right;
+			inputEnabled = true;
+		}
+		if (transform.localPosition.x <= -(strafeAmount - strafeResponsivenessLevel)) {
+			currentStrafeLocation = StrafeLocation.left;
+			inputEnabled = true;
+		}
+		if (transform.localPosition.x < strafeResponsivenessLevel 
+			&& transform.localPosition.x > -strafeResponsivenessLevel) {
+			currentStrafeLocation = StrafeLocation.center;
+			inputEnabled = true;
 		}
 	}
 
-	IEnumerator StrafeToLeftLane () {
-		while (localPosX > -strafeAmount) {
-			transform.Translate (Vector3.right * -(Time.deltaTime * strafeSpeed));
-			yield return null;
-		}
-		this.playerCurrentLane = laneLocation.left;
-		isAllowedInput = true;
+	public void StrafeLeft() {
+		inputEnabled = false;
+		if (currentStrafeLocation == StrafeLocation.center)
+			strafeDestinationModifier = -strafeAmount;
+		else if (currentStrafeLocation != StrafeLocation.left)
+			GoToCenterLane();
 	}
 
-	IEnumerator StrafeToCenter (int directionModifier) {
-		while (true) {
-			transform.Translate (Vector3.right * (directionModifier * (Time.deltaTime * strafeSpeed)));
-			yield return null;
-			if (this.playerCurrentLane == laneLocation.left && localPosX >= 0) {
-				break;
-			}
-			if (this.playerCurrentLane == laneLocation.right && localPosX <= 0) {
-				break;
-			}
+	public void StrafeRight() {
+		inputEnabled = false;
+		if (currentStrafeLocation == StrafeLocation.center)
+			strafeDestinationModifier = strafeAmount;
+		else if (currentStrafeLocation != StrafeLocation.right)
+			GoToCenterLane();
 
-		}
-		this.playerCurrentLane = laneLocation.center;
-		isAllowedInput = true;
 	}
 
-	IEnumerator StrafeToRightLane () {
-		while (localPosX < strafeAmount) {
-			transform.Translate (Vector3.right * (Time.deltaTime * strafeSpeed));
-			yield return null;
-		}
-		this.playerCurrentLane = laneLocation.right;
-		isAllowedInput = true;
+	public void GoToCenterLane() {
+		strafeDestinationModifier = strafeCenter;
 	}
 }
