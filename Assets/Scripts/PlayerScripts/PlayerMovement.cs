@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 	float degreesToTurn;
 	
 	Quaternion targetRotation;
-    bool turnInputEnabled;
+    //bool turnInputEnabled;
 	bool PlayerCurrentlyCentering;
 
     /* Possibly obsolete when using KillCenterPlayerCoroutine()
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start() {
         playerCenteringPrecision = 0;
         PlayerCurrentlyCentering = false;
-		turnInputEnabled = true;
+		//turnInputEnabled = true;
 		turnSpeedModifier = 5f; // 5 is best... math research?
 		GroundPiece.MoveLeft();
 	}
@@ -39,19 +39,19 @@ public class PlayerMovement : MonoBehaviour {
 		targetRotation = Quaternion.Euler(0.0f, degreesToTurn, 0.0f);
 		
 		if (this.transform.rotation == targetRotation) {
-			turnInputEnabled = true;
+			//turnInputEnabled = true;
 		} else {
 			this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
 		}
 	}
 	
 	public void TurnLeft() {
-		turnInputEnabled = false;
+		//turnInputEnabled = false;
 		degreesToTurn -= 90.0f;
 	}
 	
 	public void TurnRight() {
-		turnInputEnabled = false;
+		//turnInputEnabled = false;
 		degreesToTurn += 90.0f;
 	}
 	

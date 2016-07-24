@@ -4,14 +4,15 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerLaneChange : MonoBehaviour {
+
+	// Prevents movement before input is received from the user
+	public bool isActivatedForMovement;
+
 	public float strafeDestinationModifier;
 	public float strafeSpeed;
 	public float strafeFixedFrame;
 
 	public bool inputEnabled;
-
-	// bool to display if the player us exactly in the lane
-	public bool isSnappedToLane;
 
 	public enum StrafeLocation { left, center, right };
 	public StrafeLocation currentStrafeLocation;
@@ -20,40 +21,39 @@ public class PlayerLaneChange : MonoBehaviour {
 
 	float strafeResponsivenessLevel;
 
-	// Use this for initialization
 	void Awake() {
+		isActivatedForMovement = false;
+
 		strafeAmount = 4.0f;
 		strafeSpeed = 10.0f;
 		strafeDestinationModifier = 0.0f;
-		strafeResponsivenessLevel = 0.3f;
+		strafeResponsivenessLevel = 0.05f;
 	}
 
 	void Start() {	
 		currentStrafeLocation = StrafeLocation.center;
-		strafeDestinationModifier = 0.0f;
+		strafeDestinationModifier = 0;
 		inputEnabled = true;
 	}
-
-	// Update is called once per frame
+		
 	void Update() {
 		// fixed frame variable for movement
 		strafeFixedFrame = strafeSpeed * Time.deltaTime;
 
 		if (Input.GetKey(KeyCode.A) && inputEnabled == true) {
+			isActivatedForMovement = true;
 			StrafeLeft();
 		}
 		if (Input.GetKey(KeyCode.D) && inputEnabled == true) {
+			isActivatedForMovement = true;
 			StrafeRight();
 		}
 
 		Vector3 tempVector = transform.localPosition;
 
-		if (transform.localPosition.x != strafeDestinationModifier) {
-			isSnappedToLane = false;
+		if (isActivatedForMovement) {
 			tempVector.x = Mathf.Lerp (tempVector.x, strafeDestinationModifier, strafeFixedFrame);
 			transform.localPosition = tempVector;
-		} else {
-			isSnappedToLane = true;
 		}
 
 		SetEnumToCorrectLane();
