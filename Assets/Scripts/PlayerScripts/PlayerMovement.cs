@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
         playerCenteringPrecision = 0;
         PlayerCurrentlyCentering = false;
 		//turnInputEnabled = true;
-		turnSpeedModifier = 5f; // 5 is best... math research?
+		turnSpeedModifier = 2.4f; // 5 is best... math research?
 		GroundPiece.MoveLeft();
 	}
 	
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			while (this.transform.position.x < (centerVector.x - playerCenteringPrecision) 
 				|| this.transform.position.x > (centerVector.x + playerCenteringPrecision)) {
-				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 5.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(centerVector.x, this.transform.position.y, this.transform.position.z), Time.deltaTime * (runSpeed / 3.0f));
 				yield return null;
 			}
 		} else {
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 
 			while (this.transform.position.z < (centerVector.z - playerCenteringPrecision) 
 				|| this.transform.position.z > (centerVector.z + playerCenteringPrecision)) {
-				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 5.0f));
+				this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y, centerVector.z), Time.deltaTime * (runSpeed / 3.0f));
 				yield return null;
 			}
 		}

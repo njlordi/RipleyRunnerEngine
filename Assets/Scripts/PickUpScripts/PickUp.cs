@@ -22,7 +22,7 @@ public class PickUp : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		playerSounds.PlayPickUpNoise();
-		PlayerStats.pickUpsCollected++;
+		PlayerData.pickUpsCollected++;
 		gameObject.SetActive(false);
 	}
 }
