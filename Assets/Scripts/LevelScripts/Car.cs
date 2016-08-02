@@ -5,8 +5,8 @@ public class Car : MonoBehaviour
 {
 	// scale of 1-5 (1 = will not happen) (5 = guaranteed) ...maybe move to centralized class?
 	float chanceToExist;
-	public bool isExistent;
 
+	public bool isExistent;
 	public float carSpeed;
 	public float delayInCarMovement;
 	Renderer carRenderer;
@@ -24,7 +24,7 @@ public class Car : MonoBehaviour
 
 		chanceToExist = 3;
 		carOrigin = this.transform.localPosition;
-		delayInCarMovement = Random.Range (1.0f, 2.0f);
+		delayInCarMovement = Random.Range (0.0f, 2.0f);
 		timeMarker = Time.time;
 
 		if (isExistent) {

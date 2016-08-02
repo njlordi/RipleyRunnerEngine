@@ -7,12 +7,16 @@ using System.Collections;
 /// that the player is walking on.
 /// </summary>
 public class PlayerDetector : MonoBehaviour {
-	float destroyDelayInSeconds;
+
+	float disableDelayInSeconds;
+	float slowDisableDelayInSeconds;
+
 	PiecePlacer piecePlacerReference;
 	PlayerMovement playerMovementReference;
 	
 	void Awake() {
-		destroyDelayInSeconds = 0.5f;
+		disableDelayInSeconds = 0.5f;
+		slowDisableDelayInSeconds = 4.0f;
 		piecePlacerReference = GameObject.FindGameObjectWithTag("GameManager")
 			.GetComponent<PiecePlacer>();
 		playerMovementReference = GameObject.FindGameObjectWithTag("PlayerGeneralLocation").GetComponent<PlayerMovement>();
@@ -36,10 +40,19 @@ public class PlayerDetector : MonoBehaviour {
 		if (piecePlacerReference != null)
 			piecePlacerReference.PlaceRandomPiece(transform.parent.gameObject);
 	}
-	
+
+	/// <summary>
+	/// Disables the piece the player is leaving. 
+	/// Uses a delay and uses a greater delay for extra slow movement.
+	/// </summary>
 	IEnumerator DisableParent() {
-		// This should be made relative to player runSpeed later on...
-		yield return new WaitForSeconds(destroyDelayInSeconds);
-		transform.parent.gameObject.SetActive(false);
+
+		if (PlayerData.runSpeed <= 20) {
+			yield return new WaitForSeconds (slowDisableDelayInSeconds);
+			transform.parent.gameObject.SetActive (false);
+		} else {
+			yield return new WaitForSeconds (disableDelayInSeconds);
+			transform.parent.gameObject.SetActive (false);
+		}
 	}
 }

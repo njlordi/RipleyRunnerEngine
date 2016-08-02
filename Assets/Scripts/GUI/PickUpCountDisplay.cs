@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class PickUpCountDisplay : MonoBehaviour {
+
 	Text NumberOfPickUps;
 	// Use this for initialization
 	void Start () {

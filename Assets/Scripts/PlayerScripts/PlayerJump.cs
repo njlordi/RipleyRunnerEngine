@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerJump : MonoBehaviour
 {
     Rigidbody rb;
-    //public float jumpSpeed;
     public float jumpHeight;
 	public bool jumpInput;
 
@@ -13,17 +12,13 @@ public class PlayerJump : MonoBehaviour
 
     RaycastHit rh;
 
-    // Use this for initialization
-    void Start()
-    {
+    void Start() {
         rb = GetComponent<Rigidbody>();
         jumpHeight = 8;
 		rayLength = 1.5f;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+		
+    void Update() {
 		rayDirection = this.transform.TransformDirection(Vector3.down);
 
 		Debug.DrawRay(this.transform.position, rayDirection, Color.red);
@@ -31,14 +26,12 @@ public class PlayerJump : MonoBehaviour
         if (IsGrounded())
             Debug.Log("Touching the ground");
 
-		if (Input.GetKeyDown(KeyCode.Space) && jumpInput)
-        {
+		if (Input.GetKeyDown(KeyCode.Space) && jumpInput) {
 			rb.velocity = new Vector3(0, jumpHeight, 0);
         }
     }
 
-    public bool IsGrounded()
-	{
+    public bool IsGrounded() {
 		if (Physics.Raycast (this.transform.position, rayDirection, out rh, rayLength)) {
 			
 			if (rh.collider.tag == "StraightPiece") {

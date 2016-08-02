@@ -161,7 +161,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1847253620}
+      - m_Target: {fileID: 0}
         m_MethodName: TimeBasedPause
         m_Mode: 1
         m_Arguments:
@@ -320,7 +320,6 @@ MonoBehaviour:
   currentStrafeLocation: 0
   strafeAmount: 0
   strafeCenter: 0
-  strafeResponsivenessLevel: 0
 --- !u!23 &529195516
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -393,7 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a5c6184600c45d3a0527cb03eeae3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
   MutePlayerAudio: 1
 --- !u!82 &529195521
 AudioSource:
@@ -480,11 +478,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb5c20d3f1c04a82a827f9ac844d7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   jumpHeight: 0
   jumpInput: 1
   rayLength: 0
-  rayDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &734606012
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31a66695417c4d07a3884c1e3c774e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfPickUps: {fileID: 0}
 --- !u!114 &872005001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,13 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa21843a2cb3ba4b82161a760c2c91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 100
-  turnSpeed: 0
   turnSpeedModifier: 0
-  degreesToTurn: 0
-  targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  PlayerCurrentlyCentering: 0
-  playerCenteringPrecision: 0
   OffCenterAmount: 0
 --- !u!1 &1258843882
 GameObject:
@@ -1024,7 +1013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e356a476af85d4a88a7a63ac8bb2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionText: {fileID: 0}
 --- !u!114 &1347982990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,8 +1298,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1847253619}
-  - 114: {fileID: 1847253620}
   - 114: {fileID: 1847253621}
+  - 114: {fileID: 1847253622}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1332,18 +1320,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &1847253620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1847253618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099d63ab6f1d14e4ba1136cbca8a89d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTimePaused: 0
 --- !u!114 &1847253621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,3 +1341,15 @@ MonoBehaviour:
   RightTurnPiecePool: []
   IntersectionPiecePool: []
   onlyIntersectionPieces: 0
+--- !u!114 &1847253622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1847253618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84ee0d15f1cb49d997ed0f4847258ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSpeedInspector: 0

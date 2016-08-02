@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class LevelManager : MonoBehaviour {
     public bool isTimePaused;
 
 	public enum MapSpawnDirection {facingZ, facingNegX, facingX};

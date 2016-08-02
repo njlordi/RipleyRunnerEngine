@@ -47,10 +47,10 @@ public class PiecePlacer : MonoBehaviour {
 		if (previousPiece.tag == "StraightPiece") {
 			PlacePieceStraightAhead(previousPiece, GetValidRandomPiece());
 		} else if (previousPiece.tag == "LeftTurnPiece") {
-			GameManager.DirectionToSpawnShiftLeft();
+			LevelManager.DirectionToSpawnShiftLeft();
 			PlacePieceOnTheLeft(previousPiece, GetValidRandomPiece());
 		} else if (previousPiece.tag == "RightTurnPiece") {
-			GameManager.DirectionToSpawnShiftRight();
+			LevelManager.DirectionToSpawnShiftRight();
 			PlacePieceOnTheRight(previousPiece, GetValidRandomPiece());
 		}
 	}
@@ -69,7 +69,7 @@ public class PiecePlacer : MonoBehaviour {
 		 	randArrayIndex = Random.Range(0, 5);
 		}
 
-		string pieceSelection = GameManager.pieceTagArray[randArrayIndex];
+		string pieceSelection = LevelManager.pieceTagArray[randArrayIndex];
 		
 		switch(pieceSelection) {
 		case "StraightPiece":

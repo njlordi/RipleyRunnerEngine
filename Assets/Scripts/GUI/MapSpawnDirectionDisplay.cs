@@ -11,11 +11,11 @@ public class MapSpawnDirectionDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingZ) {
+		if (LevelManager.axisDirection == LevelManager.MapSpawnDirection.facingZ) {
 			directionText.text = "Map is generating towards Z";
-		} else if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingX) {
+		} else if (LevelManager.axisDirection == LevelManager.MapSpawnDirection.facingX) {
 			directionText.text = "Map is generating towards X";
-		} else if (GameManager.axisDirection == GameManager.MapSpawnDirection.facingNegX) {
+		} else if (LevelManager.axisDirection == LevelManager.MapSpawnDirection.facingNegX) {
 			directionText.text = "Map is generating away from X";
 		}
 	}
