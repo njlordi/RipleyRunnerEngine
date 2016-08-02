@@ -28,7 +28,7 @@ public class Car : MonoBehaviour
 		timeMarker = Time.time;
 
 		if (isExistent) {
-			carSpeed = Random.Range (20.0f, 60.0f);
+			carSpeed = Random.Range (30.0f, 60.0f);
 			carRenderer.enabled = true;
 		} else {
 			carSpeed = 0;

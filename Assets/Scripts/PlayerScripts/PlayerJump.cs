@@ -9,7 +9,6 @@ public class PlayerJump : MonoBehaviour
 
 	public float rayLength;
 	Vector3 rayDirection;
-
     RaycastHit rh;
 
     void Start() {
