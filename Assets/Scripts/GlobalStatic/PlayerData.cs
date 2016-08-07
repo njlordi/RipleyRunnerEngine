@@ -6,6 +6,7 @@ public class PlayerData : MonoBehaviour
 
 	public static int pickUpsCollected = 0;
 	public static int runSpeed = 75;
+    public static float distanceRan = 0;
 
 	// For viewing player's speed in the inspector (debugging)
 	public int runSpeedInspector;
@@ -16,6 +17,7 @@ public class PlayerData : MonoBehaviour
 
 	void Update ()
 	{
+        distanceRan += Time.deltaTime * runSpeed;
 
 		if (runSpeedInspector != runSpeed) {
 			runSpeed = runSpeedInspector;

@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		playerCenteringPrecision = 0;
 		PlayerCurrentlyCentering = false;
-		turnSpeedModifier = 2.4f; // 5 is best... math research?
+		turnSpeedModifier = 2.4f; // ... math research?
 		GroundPiece.MoveLeft ();
 	}
 
