@@ -12,6 +12,6 @@ public class PickUpCountDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		NumberOfPickUps.text = PlayerData.pickUpsCollected.ToString();
+		NumberOfPickUps.text = GameData.pickUpsCollected.ToString();
 	}
 }

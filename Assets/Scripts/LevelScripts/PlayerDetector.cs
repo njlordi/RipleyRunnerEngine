@@ -47,7 +47,7 @@ public class PlayerDetector : MonoBehaviour {
 	/// </summary>
 	IEnumerator DisableParent() {
 
-		if (PlayerData.runSpeed <= 20) {
+		if (GameData.runSpeed <= 20) {
 			yield return new WaitForSeconds (slowDisableDelayInSeconds);
 			transform.parent.gameObject.SetActive (false);
 		} else {

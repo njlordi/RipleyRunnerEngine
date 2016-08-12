@@ -7,11 +7,11 @@ public class Car : MonoBehaviour
 	float chanceToExist;
 
 	public bool isExistent;
-	public float carSpeed;
-	public float delayInCarMovement;
+    public bool isOriginLeft;
+    public float carSpeed;
+
 	Renderer carRenderer;
 	Vector3 carOrigin;
-	float timeMarker;
 
 	void Awake ()
 	{
@@ -21,14 +21,11 @@ public class Car : MonoBehaviour
 	void OnEnable ()
 	{
 		rollForExistence ();
-
 		chanceToExist = 3;
 		carOrigin = this.transform.localPosition;
-		delayInCarMovement = Random.Range (0.0f, 2.0f);
-		timeMarker = Time.time;
 
-		if (isExistent) {
-			carSpeed = Random.Range (30.0f, 60.0f);
+		if (isExistent && isOriginLeft) {
+            carSpeed = 50.0f;
 			carRenderer.enabled = true;
 		} else {
 			carSpeed = 0;
@@ -39,7 +36,6 @@ public class Car : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Time.time >= (timeMarker + delayInCarMovement))
 			this.transform.Translate (Vector3.forward * Time.deltaTime * carSpeed);
 	}
 
@@ -54,7 +50,6 @@ public class Car : MonoBehaviour
 			isExistent = true;
 		} else {
 			isExistent = false;
-		}
-			
+		}		
 	}
 }

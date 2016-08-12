@@ -34,9 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update ()
 	{
-		turnSpeed = PlayerData.runSpeed * turnSpeedModifier;
+		turnSpeed = GameData.runSpeed * turnSpeedModifier;
 		
-		this.transform.Translate (Vector3.forward * Time.deltaTime * PlayerData.runSpeed);
+		this.transform.Translate (Vector3.forward * Time.deltaTime * GameData.runSpeed);
 		
 		targetRotation = Quaternion.Euler (0.0f, degreesToTurn, 0.0f);
 		
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 			       || this.transform.position.x > (centerVector.x + playerCenteringPrecision)) {
 				this.transform.position = Vector3.Lerp (this.transform.position, 
 					new Vector3 (centerVector.x, this.transform.position.y, this.transform.position.z), 
-					Time.deltaTime * (PlayerData.runSpeed / 3.0f));
+					Time.deltaTime * (GameData.runSpeed / 3.0f));
 				yield return null;
 			}
 		} else {
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 			       || this.transform.position.z > (centerVector.z + playerCenteringPrecision)) {
 				this.transform.position = Vector3.Lerp (this.transform.position, 
 					new Vector3 (this.transform.position.x, this.transform.position.y, centerVector.z), 
-					Time.deltaTime * (PlayerData.runSpeed / 3.0f));
+					Time.deltaTime * (GameData.runSpeed / 3.0f));
 				yield return null;
 			}
 		}

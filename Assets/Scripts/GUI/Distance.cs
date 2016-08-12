@@ -13,7 +13,7 @@ public class Distance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        wholeNumberDistance = (int)PlayerData.distanceRan; 
+        wholeNumberDistance = (int)GameData.distanceRan; 
         distanceText.text = "Score: \n" + wholeNumberDistance.ToString();
 	}
 }
